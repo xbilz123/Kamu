@@ -2,62 +2,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Love Text</title>
+<title>Love Text Glow</title>
 
 <style>
-
 body{
 margin:0;
-overflow:hidden;
 background:black;
-font-family:Arial, Helvetica, sans-serif;
+overflow:hidden;
+font-family:monospace;
 }
 
 canvas{
 display:block;
 }
-
-.big{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-color:white;
-font-size:55px;
-font-weight:300;
-letter-spacing:14px;
-white-space:nowrap;
-text-shadow:0 0 10px #fff,0 0 30px #ff6fa5;
-pointer-events:none;
-}
-
 </style>
-</head>
 
+</head>
 <body>
 
 <canvas id="canvas"></canvas>
-<div class="big">MAAFIN YAH AYA</div>
+
+<!-- musik -->
+<audio id="music" autoplay loop muted>
+<source src="https://files.catbox.moe/4f8q2o.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const music = document.getElementById("music");
 
+/* coba aktifkan suara */
+window.addEventListener("load", () => {
+music.muted = false;
+music.play().catch(()=>{});
+});
+
+/* kalau user sentuh layar, musik pasti play */
+document.addEventListener("click", () => {
+music.muted = false;
+music.play();
+});
+
+function resize(){
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+}
 
-let texts=[];
+resize();
+window.addEventListener("resize", resize);
 
-for(let i=0;i<90;i++){
+const text = "i love u naya";
+let offset = 0;
 
-texts.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:8+Math.random()*18,   // lebih kecil
-speed:1.2+Math.random()*1.4,
-opacity:0.2+Math.random()*0.6
-});
+let heart = [];
+
+for(let t=0; t<Math.PI*2; t+=0.01){
+
+let x = 16*Math.pow(Math.sin(t),3);
+let y = 13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+
+heart.push({x,y});
 
 }
 
@@ -65,28 +71,30 @@ function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
+ctx.fillStyle="#ff6fa5";
+ctx.font="16px monospace";
 ctx.textAlign="center";
+
 ctx.shadowColor="#ff6fa5";
-ctx.shadowBlur=12;
+ctx.shadowBlur=10;
 
-for(let i=0;i<texts.length;i++){
+let centerX = canvas.width/2;
+let centerY = canvas.height/2;
 
-let t=texts[i];
+for(let i=0;i<heart.length;i++){
 
-ctx.globalAlpha=t.opacity;
-ctx.font=t.size+"px Arial";
-ctx.fillStyle="white";
+let p = heart[(i+offset)%heart.length];
 
-ctx.fillText("I LOVE U AYA",t.x,t.y);
+let px = centerX + p.x*17;
+let py = centerY - p.y*17;
 
-t.y -= t.speed;
-
-if(t.y < -50){
-t.y = canvas.height + 50;
-t.x = Math.random()*canvas.width;
+if(i%10===0){
+ctx.fillText(text,px,py);
 }
 
 }
+
+offset++;
 
 requestAnimationFrame(draw);
 
