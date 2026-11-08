@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nebula VPS — Server DigitalOcean Instan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1526;--bg2:#111c33;--card:rgba(24,38,68,.55);--line:rgba(110,168,255,.16);--tx:#e8f0ff;--mut:#8fa3c7;--n1:#4cc9ff;--n2:#5b7cff;--n3:#9b8cff;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:auto}
+html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{font-family:Sora,system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 600px at 15% -10%,rgba(76,201,255,.18),transparent 60%),radial-gradient(800px 600px at 95% 10%,rgba(91,124,255,.2),transparent 60%),radial-gradient(700px 500px at 50% 110%,rgba(155,140,255,.12),transparent 60%),linear-gradient(180deg,#0d1526,#0f1a30)}
+.bg:after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.18;mask-image:radial-gradient(ellipse at 50% 0,#000,transparent 70%)}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px max(24px,calc(50% - 560px));backdrop-filter:blur(18px) saturate(1.4);background:rgba(13,21,38,.6);border-bottom:1px solid var(--line)}
+.logo{font-weight:700;letter-spacing:.5px;font-size:20px;cursor:pointer;background:linear-gradient(90deg,var(--n1),var(--n2));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font:600 14px Sora;color:var(--tx);background:rgba(91,124,255,.12);border:1px solid var(--line);padding:11px 20px;border-radius:12px;cursor:pointer;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-2px);border-color:rgba(76,201,255,.6);box-shadow:0 10px 40px -10px rgba(76,201,255,.55)}
+.btn:active{transform:translateY(0) scale(.97);transition-duration:.15s}
+.btn.pri{background:linear-gradient(135deg,var(--n1),var(--n2));border:0;color:#04101f;box-shadow:0 8px 30px -8px rgba(76,201,255,.6)}
+.btn.pri:hover{box-shadow:0 14px 50px -8px rgba(76,201,255,.85)}
+.btn[disabled]{opacity:.4;pointer-events:none}.btn.sm{padding:7px 12px;font-size:12px;border-radius:9px}.btn.red:hover{border-color:#ff6b8a;box-shadow:0 10px 30px -10px #ff6b8a}
+main{max-width:1120px;margin:0 auto;padding:0 24px 100px}
+.view{animation:in .9s var(--ease) both}@keyframes in{from{opacity:0;transform:translateY(24px) scale(.99);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.hero{text-align:center;padding:110px 0 70px}
+.pill{display:inline-block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--n1);border:1px solid var(--line);padding:7px 16px;border-radius:99px;background:rgba(76,201,255,.07)}
+h1{font-size:clamp(36px,6vw,68px);line-height:1.08;margin:26px 0 20px;font-weight:700;letter-spacing:-1.5px}
+h1 span{background:linear-gradient(90deg,var(--n1),var(--n2) 50%,var(--n3));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(76,201,255,.35))}
+.sub{color:var(--mut);max-width:560px;margin:0 auto 34px;line-height:1.8;font-weight:300}
+.feat{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:44px;color:var(--mut);font-size:13px}.feat b{color:var(--n1);margin-right:6px}
+h2{font-size:28px;margin:30px 0 8px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;backdrop-filter:blur(14px);transition:all .7s var(--ease);position:relative}
+.card.hov:hover{transform:translateY(-8px);border-color:rgba(76,201,255,.5);box-shadow:0 30px 80px -30px rgba(76,201,255,.45),inset 0 0 40px rgba(76,201,255,.04)}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.rv.show{opacity:1;transform:none}
+.pname{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--n1)}.price{font-size:32px;font-weight:700;margin:12px 0 4px}.price small{font-size:13px;color:var(--mut);font-weight:300}
+.spec{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:10px;color:var(--mut);font-size:14px}.spec b{color:var(--tx);font-weight:600}
+.stk{font-size:12px;color:var(--mut);margin-bottom:14px}.stk.ok{color:#5df0b0}.stk.no{color:#ff7b9a}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 26px}.chip{padding:11px 18px;border-radius:12px;border:1px solid var(--line);background:rgba(91,124,255,.07);cursor:pointer;font:400 14px Sora;color:var(--tx);transition:all .45s var(--ease)}
+.chip:hover{transform:translateY(-2px);border-color:rgba(76,201,255,.5)}.chip.on{background:linear-gradient(135deg,rgba(76,201,255,.25),rgba(91,124,255,.25));border-color:var(--n1);box-shadow:0 0 30px -6px rgba(76,201,255,.6)}
+.step{font-size:12px;letter-spacing:2px;color:var(--mut);text-transform:uppercase}.two{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;margin-top:30px}@media(max-width:820px){.two{grid-template-columns:1fr}}
+.sum div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--mut)}.sum b{color:var(--tx)}
+.tot{font-size:26px;font-weight:700;margin:18px 0}
+input,select,textarea{width:100%;font:400 14px Sora;color:var(--tx);background:rgba(8,14,28,.6);border:1px solid var(--line);border-radius:12px;padding:13px 15px;outline:0;transition:all .4s var(--ease);margin-bottom:12px}
+input:focus,select:focus,textarea:focus{border-color:var(--n1);box-shadow:0 0 0 4px rgba(76,201,255,.12)}option{background:#0f1a30}
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(6,10,20,.65);backdrop-filter:blur(10px);animation:fade .5s var(--ease)}@keyframes fade{from{opacity:0}}
+.modal .card{width:min(420px,92vw);animation:in .7s var(--ease)}.err{color:#ff7b9a;font-size:13px;min-height:18px;margin-bottom:8px}
+.qr{background:#fff;border-radius:20px;padding:14px;width:min(300px,100%);margin:20px auto;box-shadow:0 0 80px -10px rgba(76,201,255,.6)}.qr img{width:100%;display:block}
+.center{text-align:center}.mono{font-family:'JetBrains Mono',monospace;font-size:13px}.cred{background:rgba(8,14,28,.7);border:1px solid var(--line);border-radius:14px;padding:6px 16px;margin-top:16px}
+.cred div{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.cred div:last-child{border:0}.cred span{color:var(--mut);font-size:12px}
+.badge{font-size:11px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--n1)}.badge.paid{color:#5df0b0;border-color:rgba(93,240,176,.4)}.badge.expired{color:#ff7b9a;border-color:rgba(255,123,154,.4)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:11px 8px;text-align:left;border-bottom:1px solid var(--line)}th{color:var(--mut);font-weight:400}td input{margin:0;padding:8px}
+.tabs{display:flex;gap:10px;margin:24px 0}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}.stats .card{padding:20px}.stats b{display:block;font-size:26px;margin-top:6px}
+.scroll{overflow-x:auto}#toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,30px);opacity:0;background:rgba(20,34,64,.95);border:1px solid var(--n1);padding:13px 22px;border-radius:14px;transition:all .6s var(--ease);z-index:99;font-size:14px}#toast.on{opacity:1;transform:translate(-50%,0)}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:rgba(91,124,255,.35);border-radius:9px}
+</style></head><body>
+<div class="bg"></div>
+<header><div class="logo" onclick="location.hash=''">◈ NEBULA VPS</div><nav id="nav"></nav></header>
+<main id="app"></main><div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),app=$('#app');
+let token=localStorage.t||'',me=null,plans=[],sel={},poll=null;
+const rp=n=>'Rp'+Number(n).toLocaleString('id-ID');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const REG={sgp1:'Singapore',nyc1:'New York',nyc3:'New York 3',sfo3:'San Francisco',ams3:'Amsterdam',fra1:'Frankfurt',lon1:'London',blr1:'Bangalore',tor1:'Toronto',syd1:'Sydney'};
+const rn=r=>REG[r]?`${REG[r]} (${r})`:r;
+async function api(p,method,body){const r=await fetch('/api'+p,{method:method||(body?'POST':'GET'),headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||'Terjadi kesalahan');return d}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600)}
+function copy(t){navigator.clipboard.writeText(t).then(()=>toast('Tersalin ✓'))}
+// smooth scroll
+const lenis=new Lenis({duration:1.25,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+(function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&(e.target.classList.add('show'),io.unobserve(e.target))),{threshold:.1});
+function reveal(){document.querySelectorAll('.rv').forEach((e,i)=>{e.style.transitionDelay=(i%4)*90+'ms';io.observe(e)})}
+function setView(h){clearInterval(poll);app.innerHTML=`<div class="view">${h}</div>`;lenis.scrollTo(0,{immediate:true});reveal()}
+function nav(){$('#nav').innerHTML=me?`${me.role==='admin'?'<button class="btn" onclick="location.hash=\'#/admin\'">Admin</button>':''}<button class="btn" onclick="location.hash=\'#/orders\'">Pesanan Saya</button><button class="btn" onclick="logout()">Keluar</button>`:`<button class="btn" onclick="authModal()">Masuk / Daftar</button>`}
+function logout(){token='';localStorage.removeItem('t');me=null;nav();location.hash='';toast('Berhasil keluar')}
+function authModal(after){let mode='login';const m=document.createElement('div');m.className='modal';
+ const draw=()=>{m.innerHTML=`<div class="card"><h2 style="margin-top:0">${mode==='login'?'Masuk':'Buat Akun'}</h2><p class="sub" style="margin:0 0 20px;text-align:left">${mode==='login'?'Masuk untuk membeli VPS.':'Daftar dulu sebelum membeli.'}</p><input id="ae" type="email" placeholder="Email"><input id="ap" type="password" placeholder="Password"><div class="err" id="aerr"></div><button class="btn pri" style="width:100%" id="ago">${mode==='login'?'Masuk':'Daftar'}</button><p class="sub" style="margin:18px 0 0;font-size:13px;cursor:pointer" id="asw">${mode==='login'?'Belum punya akun? Daftar':'Sudah punya akun? Masuk'}</p></div>`;
+ m.onclick=e=>e.target===m&&m.remove();m.querySelector('#asw').onclick=()=>{mode=mode==='login'?'reg':'login';draw()};
+ m.querySelector('#ago').onclick=async()=>{try{const d=await api(mode==='login'?'/login':'/register','POST',{email:m.querySelector('#ae').value,password:m.querySelector('#ap').value});token=d.token;localStorage.t=token;me=d.user;nav();m.remove();toast('Selamat datang!');after&&after()}catch(e){m.querySelector('#aerr').textContent=e.message}}};
+ draw();document.body.appendChild(m)}
+// ---------- Home ----------
+async function home(){plans=await api('/plans');
+ setView(`<section class="hero"><span class="pill">DigitalOcean • Pengiriman Otomatis</span><h1>VPS Premium,<br><span>Aktif Seketika.</span></h1><p class="sub">Pilih spesifikasi, tentukan region & OS, bayar dengan QRIS — akun VPS langsung muncul di layar Anda tanpa menunggu.</p><button class="btn pri" onclick="lenis.scrollTo('#plans',{duration:1.6})">Lihat Paket</button>
+ <div class="feat"><span><b>⚡</b>Kirim otomatis</span><span><b>◈</b>QRIS semua e-wallet</span><span><b>🌍</b>Banyak region</span></div></section>
+ <h2 id="plans" class="rv">Pilih Paket</h2><div class="grid">${plans.map(p=>{const n=p.combos.reduce((a,c)=>a+c.n,0);return `<div class="card hov rv"><div class="pname">${esc(p.name)}</div><div class="price">${rp(p.price)}<small> /akun</small></div><ul class="spec"><li><b>${p.cpu}</b> vCPU</li><li><b>${p.ram} GB</b> RAM</li><li><b>${p.disk} GB</b> NVMe SSD</li></ul><div class="stk ${n?'ok':'no'}">${n?'● Stok tersedia: '+n:'● Stok habis'}</div><button class="btn ${n?'pri':''}" style="width:100%" ${n?'':'disabled'} onclick="location.hash='#/buy/${p.id}'">Beli Sekarang</button></div>`}).join('')}</div>`)}
+// ---------- Buy ----------
+async function buy(id){if(!plans.length)plans=await api('/plans');const p=plans.find(x=>x.id==id);if(!p)return location.hash='';sel={region:'',os:'',version:''};
+ const draw=()=>{const C=p.combos,R=[...new Set(C.map(c=>c.region))],O=[...new Set(C.filter(c=>c.region===sel.region).map(c=>c.os))],V=[...new Set(C.filter(c=>c.region===sel.region&&c.os===sel.os).map(c=>c.version))];
+ const ok=sel.region&&sel.os&&sel.version,ch=(arr,k,f)=>`<div class="chips">${arr.map(v=>`<button class="chip ${sel[k]===v?'on':''}" data-k="${k}" data-v="${esc(v)}">${esc(f?f(v):v)}</button>`).join('')||'<span class="sub" style="margin:0">Pilih langkah sebelumnya</span>'}</div>`;
+ setViewKeep(`<a class="step" style="cursor:pointer" onclick="location.hash=''">← Kembali</a><h2>Konfigurasi ${esc(p.name)}</h2><div class="two"><div class="card"><div class="step">1 · Region</div>${ch(R,'region',rn)}<div class="step">2 · Sistem Operasi</div>${ch(O,'os')}<div class="step">3 · Versi</div>${ch(V,'version')}</div>
+ <div class="card sum"><div class="pname">Ringkasan</div><div><span>Paket</span><b>${esc(p.name)}</b></div><div><span>Spek</span><b>${p.cpu} vCPU · ${p.ram} GB</b></div><div><span>Region</span><b>${sel.region?esc(rn(sel.region)):'-'}</b></div><div><span>OS</span><b>${sel.os?esc(sel.os+' '+sel.version):'-'}</b></div><div class="tot">${rp(p.price)}</div><button class="btn pri" style="width:100%" id="pay" ${ok?'':'disabled'}>Bayar dengan QRIS</button></div></div>`);
+ app.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const k=b.dataset.k;sel[k]=b.dataset.v;if(k==='region'){sel.os='';sel.version=''}if(k==='os')sel.version='';draw()});
+ const pay=$('#pay');if(pay)pay.onclick=()=>{const go=async()=>{try{pay.disabled=true;const d=await api('/order','POST',{plan_id:p.id,...sel});location.hash='#/pay/'+d.id}catch(e){toast(e.message);pay.disabled=false}};me?go():authModal(go)}};
+ setView('');draw()}
+function setViewKeep(h){const v=app.querySelector('.view');v.style.animation='none';v.innerHTML=h;v.querySelectorAll('.rv').forEach(e=>e.classList.add('show'))}
+// ---------- Pay ----------
+async function pay(id){if(!me)return authModal(()=>pay(id));setView('<div class="center sub">Memuat…</div>');
+ const draw=o=>{const v=app.querySelector('.view');if(o.status==='paid'){const f=o.cred.split('|').map(s=>s.trim()),L=['IP Address','Username','Password','Info'];
+  v.innerHTML=`<div class="center" style="padding:50px 0 20px"><div class="pill" style="color:#5df0b0">✓ Pembayaran Berhasil</div><h1 style="font-size:42px">VPS Anda <span>Siap!</span></h1><p class="sub">${esc(o.plan)} · ${esc(rn(o.region))} · ${esc(o.os)} ${esc(o.version)}</p></div><div class="card" style="max-width:560px;margin:auto"><div class="pname">Detail Akun VPS</div><div class="cred">${f.map((x,i)=>`<div><span>${L[i]||'Info'}</span><b class="mono">${esc(x)}</b><button class="btn sm" data-c="${esc(x)}" onclick="copy(this.dataset.c)">Salin</button></div>`).join('')}</div><p class="sub" style="font-size:12px;margin:16px 0 0">Simpan data ini. Anda juga bisa membukanya kembali di menu “Pesanan Saya”.</p></div>`;return true}
+  if(o.status==='expired'){v.innerHTML=`<div class="center card" style="max-width:480px;margin:80px auto"><h2>Pesanan kedaluwarsa</h2><p class="sub">Waktu pembayaran habis.</p><button class="btn pri" onclick="location.hash=''">Pesan Ulang</button></div>`;return true}
+  const left=Math.max(0,o.created+30*60e3-Date.now()),m=String(Math.floor(left/6e4)).padStart(2,'0'),s=String(Math.floor(left%6e4/1e3)).padStart(2,'0');
+  v.innerHTML=`<div class="center" style="padding:40px 0"><span class="pill">Menunggu Pembayaran</span><h2>Scan QRIS</h2><p class="sub" style="margin-bottom:0">${esc(o.plan)} · ${esc(rn(o.region))} · ${esc(o.os)} ${esc(o.version)}</p><div class="qr"><img src="${o.qr}" alt="QRIS"></div><div class="tot">${rp(o.total)}</div><p class="sub">Batas waktu <b class="mono" style="color:var(--n1)">${m}:${s}</b><br>Halaman ini otomatis berubah setelah pembayaran terdeteksi.</p></div>`}
+ const tick=async()=>{try{const o=await api('/order/'+id);if(draw(o)){clearInterval(poll)}}catch(e){clearInterval(poll);toast(e.message);location.hash=''}};
+ await tick();poll=setInterval(tick,4000)}
+// ---------- Orders ----------
+async function orders(){if(!me)return authModal(orders);const L=await api('/my-orders');
+ setView(`<h2>Pesanan Saya</h2><div class="card" style="margin-top:20px">${L.map(o=>`<div class="row"><div><b>${esc(o.plan)}</b> <span class="badge ${o.status}">${o.status}</span><div class="sub" style="margin:6px 0 0;font-size:12px">${esc(o.id)} · ${rn(o.region)} · ${esc(o.os)} ${esc(o.version)} · ${rp(o.amount)}</div></div><button class="btn sm" onclick="location.hash='#/pay/${o.id}'">${o.status==='paid'?'Lihat VPS':'Detail'}</button></div>`).join('')||'<p class="sub">Belum ada pesanan.</p>'}</div>`)}
+// ---------- Admin ----------
+async function adminPage(tab='stock'){if(!me||me.role!=='admin')return location.hash='';const D=await api('/admin/data');
+ const T=(k,l)=>`<button class="btn ${tab===k?'pri':''}" onclick="adminPage('${k}')">${l}</button>`;
+ let body='';
+ if(tab==='stock')body=`<div class="two"><div class="card"><div class="pname">Tambah Stok VPS</div><br><select id="sp">${D.plans.map(p=>`<option value="${p.id}">${esc(p.name)} (${p.cpu}c/${p.ram}GB)</option>`).join('')}</select><select id="sr">${Object.entries(REG).map(([k,v])=>`<option value="${k}">${v} (${k})</option>`).join('')}</select><input id="so" list="osl" placeholder="OS, contoh: Ubuntu"><datalist id="osl"><option>Ubuntu<option>Debian<option>Fedora<option>Rocky Linux<option>AlmaLinux<option>CentOS Stream</datalist><input id="sv" placeholder="Versi, contoh: 22.04 LTS"><textarea id="si" rows="6" placeholder="Satu VPS per baris, format:&#10;IP|username|password&#10;143.198.1.1|root|PassKuat123"></textarea><button class="btn pri" style="width:100%" id="sadd">Simpan Stok</button></div>
+ <div class="card"><div class="pname">Stok Terakhir</div><div class="scroll" style="max-height:480px;overflow:auto"><table><tr><th>Paket</th><th>Region</th><th>OS</th><th>Status</th><th></th></tr>${D.stock.map(s=>`<tr><td>${esc(s.plan)}</td><td>${esc(s.region)}</td><td>${esc(s.os)} ${esc(s.version)}</td><td><span class="badge ${s.status==='sold'?'paid':''}">${s.status}</span></td><td>${s.status==='available'?`<button class="btn sm red" onclick="delStock(${s.id})">Hapus</button>`:''}</td></tr>`).join('')}</table></div></div></div>`;
+ if(tab==='plans')body=`<div class="card scroll"><table><tr><th>Nama</th><th>vCPU</th><th>RAM GB</th><th>Disk GB</th><th>Harga (Rp)</th><th>Aktif</th><th></th></tr>${[...D.plans,{id:0,name:'',cpu:1,ram:1,disk:25,price:0,active:1}].map(p=>`<tr data-id="${p.id}"><td><input value="${esc(p.name)}" placeholder="Paket baru"></td><td><input type="number" value="${p.cpu}"></td><td><input type="number" value="${p.ram}"></td><td><input type="number" value="${p.disk}"></td><td><input type="number" value="${p.price}"></td><td><input type="checkbox" style="width:auto" ${p.active?'checked':''}></td><td><button class="btn sm pri" onclick="savePlan(this)">${p.id?'Simpan':'Tambah'}</button></td></tr>`).join('')}</table></div>`;
+ if(tab==='orders')body=`<div class="card scroll"><table><tr><th>ID</th><th>User</th><th>Paket</th><th>Nominal</th><th>Status</th><th>Waktu</th></tr>${D.orders.map(o=>`<tr><td class="mono">${esc(o.id)}</td><td>${esc(o.email)}</td><td>${esc(o.plan)}</td><td>${rp(o.amount)}</td><td><span class="badge ${o.status}">${o.status}</span></td><td>${new Date(o.created).toLocaleString('id-ID')}</td></tr>`).join('')}</table></div>`;
+ setViewKeep0(`<h2>Dashboard Admin</h2><div class="stats"><div class="card"><span class="sub">Pendapatan</span><b>${rp(D.stats.revenue)}</b></div><div class="card"><span class="sub">Stok tersedia</span><b>${D.stats.available}</b></div><div class="card"><span class="sub">Pengguna</span><b>${D.stats.users}</b></div></div><div class="tabs">${T('stock','Stok VPS')}${T('plans','Paket & Harga')}${T('orders','Pesanan')}</div>${body}`);
+ const a=$('#sadd');if(a)a.onclick=async()=>{try{const r=await api('/admin/stock','POST',{plan_id:+$('#sp').value,region:$('#sr').value,os:$('#so').value,version:$('#sv').value,items:$('#si').value});toast(r.added+' stok ditambahkan');adminPage('stock')}catch(e){toast(e.message)}}}
+function setViewKeep0(h){if(!app.querySelector('.view'))setView('');setViewKeep(h)}
+async function delStock(id){await api('/admin/stock/'+id,'DELETE');adminPage('stock')}
+async function savePlan(b){const r=b.closest('tr'),i=[...r.querySelectorAll('input')];await api('/admin/plan','POST',{id:+r.dataset.id,name:i[0].value,cpu:+i[1].value,ram:+i[2].value,disk:+i[3].value,price:+i[4].value,active:i[5].checked});toast('Tersimpan ✓');adminPage('plans')}
+// ---------- Router ----------
+async function route(){const h=location.hash.slice(1)||'/';try{if(h==='/')await home();else if(h.startsWith('/buy/'))await buy(h.split('/')[2]);else if(h.startsWith('/pay/'))await pay(h.split('/')[2]);else if(h==='/orders')await orders();else if(h==='/admin'){setView('');await adminPage()};else await home()}catch(e){toast(e.message)}}
+addEventListener('hashchange',route);
+(async()=>{if(token){try{me=await api('/me')}catch{token='';localStorage.removeItem('t')}}nav();route()})();
+</script></body></html>
