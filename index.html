@@ -4,19 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-
+<meta name="theme-color" content="#050505">
 <title>Robil Maulana | Portfolio</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #080808;
-  --panel: #141414;
-  --white: #f5f5f5;
-  --silver: #aaa;
-  --line: rgba(255,255,255,.13);
+  --bg: #050505;
+  --surface: #101010;
+  --silver: #d8d8d8;
+  --muted: #858585;
+  --line: rgba(255,255,255,.12);
+  --white: #fff;
 }
 
 * {
@@ -27,423 +29,584 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  background:
-    radial-gradient(circle at 50% 10%, #202020 0, transparent 38rem),
-    var(--bg);
+  background: var(--bg);
   color: var(--white);
-  font-family: Inter, system-ui, Arial, sans-serif;
-  line-height: 1.6;
+  font-family: 'Space Grotesk', sans-serif;
   overflow-x: hidden;
 }
 
+/* BACKGROUND GRID */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 55px 55px;
+  mask-image: linear-gradient(to bottom, black, transparent 95%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(180,180,180,.09), transparent 35%),
+    radial-gradient(circle at 90% 80%, rgba(120,120,120,.05), transparent 30%);
+}
+
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
 
 button {
-  font: inherit;
+  font-family: inherit;
 }
 
-.wrap {
-  width: min(1100px, 90%);
+.container {
+  width: min(1150px, 90%);
   margin: auto;
+}
+
+.section {
+  padding: 110px 0;
+}
+
+.section-label {
+  color: #999;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  margin-bottom: 45px;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #fff, #777);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 /* NAVBAR */
 
-header {
-  position: sticky;
+nav {
+  position: fixed;
   top: 0;
-  z-index: 20;
-  background: rgba(8,8,8,.85);
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(5,5,5,.78);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--line);
 }
 
-nav {
-  height: 72px;
+.nav-inner {
+  width: min(1150px, 90%);
+  height: 75px;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.brand {
-  font-size: 1.2rem;
-  font-weight: 900;
-  letter-spacing: 1px;
+.logo {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
 
-.brand span {
-  color: #888;
+.logo span {
+  color: #777;
 }
 
-.links {
+.nav-links {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
   color: #aaa;
-  font-size: .92rem;
+  font-size: 13px;
+  transition: .3s;
 }
 
-.links a:hover {
+.nav-links a:hover {
   color: white;
 }
 
-.menu {
+.menu-btn {
   display: none;
-  padding: 8px 13px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: transparent;
+  background: none;
+  border: 0;
   color: white;
+  font-size: 26px;
   cursor: pointer;
 }
 
 /* HERO */
 
 .hero {
-  min-height: 640px;
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
+  min-height: 100vh;
+  display: flex;
   align-items: center;
-  gap: 40px;
-  padding: 75px 0;
+  padding-top: 100px;
+  position: relative;
 }
 
-.eyebrow {
-  color: #aaa;
-  text-transform: uppercase;
-  font-size: .78rem;
-  letter-spacing: 3px;
-  font-weight: 800;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
 }
 
-h1 {
-  font-size: clamp(2.7rem,6vw,5rem);
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin: 18px 0;
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
 
-.gradient {
-  background: linear-gradient(110deg,#fff,#777);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #bbb;
+  border: 1px solid var(--line);
+  padding: 9px 15px;
+  border-radius: 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
 }
 
-.intro {
-  color: #aaa;
-  font-size: 1.08rem;
-  max-width: 550px;
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #ddd;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #fff;
 }
 
-.actions {
+.hero h1 {
+  font-size: clamp(45px, 7vw, 82px);
+  line-height: 1.03;
+  letter-spacing: -5px;
+  font-weight: 700;
+}
+
+.hero h1 span {
+  color: #777;
+}
+
+.hero-description {
+  color: #999;
+  line-height: 1.9;
+  max-width: 460px;
+  font-size: 14px;
+  margin: 25px 0 32px;
+}
+
+.hero-buttons {
   display: flex;
   gap: 13px;
   flex-wrap: wrap;
-  margin-top: 28px;
 }
 
 .btn {
+  padding: 13px 23px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .5px;
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  padding: 12px 20px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  font-weight: 750;
-  transition: .25s;
+  justify-content: center;
+  transition: .3s;
   cursor: pointer;
 }
 
-.btn.primary {
-  color: #080808;
-  background: linear-gradient(120deg,#fff,#999);
-  border: none;
+.btn-primary {
+  background: white;
+  color: black;
+  border: 1px solid white;
 }
 
-.btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px #ffffff18;
+.btn-primary:hover {
+  background: #bbb;
+  transform: translateY(-3px);
 }
 
-/* PROFILE */
-
-.portrait {
-  width: min(300px,80vw);
-  aspect-ratio: 1;
-  margin: auto;
-  display: grid;
-  place-items: center;
-  border-radius: 35px;
-  background:
-    radial-gradient(circle at 30% 20%,#555,transparent 55%),
-    linear-gradient(145deg,#292929,#090909);
-  border: 1px solid #ffffff35;
-  box-shadow: 0 20px 80px #ffffff0c;
+.btn-outline {
+  border: 1px solid #444;
+  color: white;
+  background: transparent;
 }
 
-.avatar {
-  font-size: 5.5rem;
-  font-weight: 950;
-  letter-spacing: -7px;
-  background: linear-gradient(145deg,#fff,#666);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+.btn-outline:hover {
+  border-color: white;
+  transform: translateY(-3px);
 }
 
-/* CRYSTAL SECTION */
+/* 3D CRYSTAL */
 
-.crystal-section {
-  padding: 85px 0;
-  text-align: center;
-}
-
-.crystal-section h2 {
-  font-size: clamp(2rem,5vw,3rem);
-  margin: 10px 0;
-}
-
-.crystal-section p {
-  color: #999;
-}
-
-.stage-3d {
+.crystal-area {
+  height: 500px;
   width: 100%;
-  height: 480px;
-  margin: 30px auto 15px;
-  border: 1px solid var(--line);
-  border-radius: 25px;
   position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at center,#33333355,transparent 65%),
-    linear-gradient(145deg,#111,#080808);
-  cursor: grab;
-  touch-action: pan-y;
-}
-
-.stage-3d:active {
-  cursor: grabbing;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #crystalCanvas {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  cursor: grab;
+  z-index: 2;
 }
 
-.stage-label {
+#crystalCanvas:active {
+  cursor: grabbing;
+}
+
+.crystal-glow {
   position: absolute;
-  top: 20px;
-  left: 22px;
-  color: #888;
-  font-size: .72rem;
-  letter-spacing: 2px;
-  pointer-events: none;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: rgba(220,220,220,.13);
+  filter: blur(90px);
 }
 
-.stage-controls {
+.crystal-fallback {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, #fff, #555, #ddd);
+  clip-path: polygon(50% 0,100% 38%,75% 100%,25% 100%,0 38%);
+  animation: float 5s ease-in-out infinite;
+}
+
+.crystal-controls {
+  position: absolute;
+  bottom: 15px;
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 18px auto;
+  gap: 10px;
+  z-index: 5;
 }
 
-.control-btn {
-  padding: 9px 17px;
-  color: #ddd;
-  background: #181818;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+.crystal-controls button {
+  background: rgba(20,20,20,.8);
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 8px 13px;
+  font-size: 10px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: .2s;
 }
 
-.control-btn:hover {
-  background: #333;
-}
-
-.drag-note {
-  color: #888;
-  font-size: .85rem;
-}
-
-/* GENERAL SECTIONS */
-
-section.content-section {
-  padding: 75px 0;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 38px;
-}
-
-.section-title h2 {
-  font-size: 2.2rem;
-  margin: 8px 0;
-}
-
-.section-title p {
-  color: #999;
-}
-
-.about,
-.skill,
-.project {
-  background: rgba(20,20,20,.85);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 25px;
-}
-
-.about {
-  max-width: 850px;
-  margin: auto;
-  text-align: center;
-  color: #aaa;
-}
-
-.about strong {
+.crystal-controls button:hover {
+  border-color: white;
   color: white;
 }
 
-.grid3 {
+@keyframes float {
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* ABOUT */
+
+.about-card {
+  background: linear-gradient(135deg, #111, #090909);
+  border: 1px solid var(--line);
+  padding: 40px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,.06);
+  filter: blur(80px);
+  right: -50px;
+  top: -50px;
+}
+
+.about-text {
+  color: #aaa;
+  line-height: 2;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.about-text strong {
+  color: white;
+}
+
+.about-quote {
+  margin-top: 25px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #eee;
+}
+
+/* SKILLS */
+
+.skills-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
 }
 
-.skill h3,
-.project h3 {
-  margin: 12px 0 5px;
+.skill-card {
+  background: rgba(15,15,15,.8);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 27px;
+  transition: .35s;
 }
 
-.skill p,
-.project p {
-  color: #999;
+.skill-card:hover {
+  border-color: #777;
+  transform: translateY(-5px);
+  background: #151515;
 }
 
-.emoji {
-  font-size: 1.8rem;
+.skill-number {
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
-.project {
-  transition: .25s;
+.skill-card h3 {
+  margin: 13px 0 18px;
+  font-size: 19px;
 }
 
-.project:hover {
-  transform: translateY(-6px);
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.skill-tags span {
+  padding: 8px 11px;
+  border: 1px solid #292929;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.learning {
+  display: inline-block;
+  font-size: 10px;
+  color: #aaa;
+  border: 1px solid #555;
+  padding: 5px 9px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+/* PROJECTS */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.project-card {
+  min-height: 220px;
+  background: linear-gradient(145deg, #171717, #090909);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: .3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
   border-color: #777;
 }
 
-.tag {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 5px 12px;
-  background: #ffffff12;
-  border-radius: 50px;
-  font-size: .78rem;
+.project-icon {
+  font-size: 27px;
   color: #ccc;
+}
+
+.project-card h3 {
+  font-size: 20px;
+  margin-bottom: 9px;
+}
+
+.project-card p {
+  color: #888;
+  font-size: 12px;
+  line-height: 1.8;
 }
 
 /* CONTACT */
 
-.contact {
-  text-align: center;
-  padding: 45px 20px;
+.contact-box {
+  padding: 55px 30px;
   border: 1px solid var(--line);
-  border-radius: 25px;
-  background: linear-gradient(140deg,#ffffff13,#ffffff03);
+  border-radius: 10px;
+  text-align: center;
+  background: radial-gradient(circle at center, #171717, #080808 75%);
 }
 
-.contact p {
-  color: #999;
-  margin-top: 10px;
+.contact-box h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  letter-spacing: -2px;
 }
+
+.contact-box p {
+  color: #888;
+  font-size: 13px;
+  margin: 15px 0 27px;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* FOOTER */
 
 footer {
-  padding: 28px 0;
-  text-align: center;
-  color: #888;
+  padding: 30px 0;
   border-top: 1px solid var(--line);
+  text-align: center;
+  color: #666;
+  font-size: 11px;
+  letter-spacing: 1px;
 }
 
 /* REVEAL */
 
 .reveal {
   opacity: 0;
-  transform: translateY(25px);
-  transition: .8s ease;
+  transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s ease;
 }
 
-.reveal.visible {
+.reveal.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-@media(prefers-reduced-motion:reduce) {
-  html { scroll-behavior: auto; }
+/* RESPONSIVE */
 
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+@media(max-width: 800px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 30px;
   }
 
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .crystal-area {
+    height: 360px;
+    margin-top: -10px;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
   }
 }
 
-/* RESPONSIVE */
-
-@media(max-width:760px) {
-  .hero {
-    grid-template-columns: 1fr;
-    text-align: center;
+@media(max-width: 650px) {
+  .section {
+    padding: 80px 0;
   }
 
-  .intro {
-    margin: auto;
-  }
-
-  .actions {
-    justify-content: center;
-  }
-
-  .links {
+  .nav-links {
     display: none;
     position: absolute;
-    top: 71px;
+    top: 75px;
     left: 0;
-    right: 0;
-    background: #111;
-    padding: 22px 5%;
+    width: 100%;
+    background: #080808;
+    border-bottom: 1px solid #333;
+    padding: 25px;
     flex-direction: column;
+    gap: 25px;
   }
 
-  .links.show {
+  .nav-links.active {
     display: flex;
   }
 
-  .menu {
+  .menu-btn {
     display: block;
   }
 
-  .grid3 {
+  .skills-grid,
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 
-  .stage-3d {
-    height: 360px;
+  .about-card {
+    padding: 25px;
+  }
+
+  .crystal-area {
+    height: 310px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
   }
 }
 </style>
@@ -451,826 +614,518 @@ footer {
 
 <body>
 
-<header>
-<nav class="wrap">
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="logo">ROBIL<span>.</span></a>
 
-  <a class="brand" href="#home">
-    ROBIL<span>MAULANA.</span>
-  </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
 
-  <div class="links" id="links">
-    <a href="#home">Beranda</a>
-    <a href="#crystal">Crystal 3D</a>
-    <a href="#about">Tentang</a>
-    <a href="#skills">Keahlian</a>
-    <a href="#projects">Proyek</a>
-    <a href="#contact">Kontak</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
   </div>
-
-  <button class="menu" id="menuBtn"
-    aria-label="Buka menu"
-    aria-expanded="false">
-    ☰
-  </button>
-
 </nav>
-</header>
-
-<main>
 
 <!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
 
-<section class="hero wrap" id="home">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="status-dot"></span>
+        PERSONAL PORTFOLIO
+      </div>
 
-  <div>
-    <div class="eyebrow">
-      Welcome to my digital world
+      <h1>
+        ROBIL<br>
+        <span>MAULANA.</span>
+      </h1>
+
+      <p class="hero-description">
+        Programmer, Gamer & Business Enthusiast.
+        Building ideas, exploring technology, and creating
+        something beyond the ordinary.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">Explore My Work ↗</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
     </div>
 
-    <h1>
-      I'm <span class="gradient">Robil Maulana</span>
-      <br>Creative Thinker.
-    </h1>
+    <div class="crystal-area">
+      <div class="crystal-glow"></div>
+      <div class="crystal-fallback" id="crystalFallback"></div>
+      <canvas id="crystalCanvas"></canvas>
 
-    <p class="intro">
-      Programmer, gamer, dan penggiat bisnis.
-      Saya senang mengeksplorasi teknologi,
-      membangun ide kreatif, dan menciptakan
-      sesuatu yang memiliki nilai.
-    </p>
-
-    <div class="actions">
-      <a class="btn primary" href="#projects">
-        Explore Projects ↗
-      </a>
-
-      <a class="btn" href="#contact">
-        Contact Me
-      </a>
-    </div>
-  </div>
-
-  <div class="portrait">
-    <div class="avatar">RM</div>
-  </div>
-
-</section>
-
-<!-- CRYSTAL 3D -->
-
-<section class="crystal-section wrap" id="crystal">
-
-  <div class="eyebrow">Interactive 3D Experience</div>
-
-  <h2>Crystal <span class="gradient">Universe</span></h2>
-
-  <p>
-    Explore the beauty of futuristic geometry.
-  </p>
-
-  <div class="stage-3d" id="stage3d">
-
-    <div class="stage-label">
-      OBJECT 001 / CRYSTAL CORE
+      <div class="crystal-controls">
+        <button id="pauseBtn">Ⅱ PAUSE</button>
+        <button id="resetBtn">↻ RESET</button>
+      </div>
     </div>
 
-    <canvas id="crystalCanvas"></canvas>
-
   </div>
-
-  <div class="stage-controls">
-
-    <button class="control-btn" id="pauseBtn">
-      ❚❚ Pause
-    </button>
-
-    <button class="control-btn" id="resetBtn">
-      ↻ Reset
-    </button>
-
-  </div>
-
-  <div class="drag-note">
-    Drag with your mouse or finger to rotate the crystal.
-  </div>
-
 </section>
 
 <!-- ABOUT -->
+<section class="section reveal" id="about">
+  <div class="container">
+    <p class="section-label">01 / WHO I AM</p>
+    <h2 class="section-title">ABOUT <span class="gradient-text">ME.</span></h2>
 
-<section class="content-section wrap" id="about">
+    <div class="about-card">
+      <p class="about-text">
+        Halo, I'm <strong>Robil Maulana</strong>. Saya memiliki kemampuan
+        di bidang programming, gaming, dan business, serta sedang
+        mempelajari dunia financial market seperti trading forex dan
+        saham. Saya senang mengembangkan ide, menciptakan sesuatu yang
+        kreatif, memahami teknologi, dan mempelajari strategi baru.
+        Bagi saya, setiap proses adalah kesempatan untuk berkembang,
+        meningkatkan kemampuan, dan menciptakan sesuatu yang bernilai.
+      </p>
 
-  <div class="section-title">
-    <div class="eyebrow">Who am I?</div>
-    <h2>About Me</h2>
+      <div class="about-quote">
+        Think Smart. Build Big. Keep Evolving. 🚀
+      </div>
+    </div>
   </div>
-
-  <div class="about">
-    <p>
-      Halo! Saya <strong>Robil Maulana</strong>.
-      Saya memiliki ketertarikan pada dunia
-      <strong>programming, gaming, dan bisnis</strong>.
-      Saya senang mempelajari teknologi baru,
-      mengembangkan kemampuan, dan mengubah
-      ide menjadi karya digital.
-    </p>
-  </div>
-
 </section>
 
 <!-- SKILLS -->
+<section class="section reveal" id="skills">
+  <div class="container">
+    <p class="section-label">02 / WHAT I DO</p>
+    <h2 class="section-title">MY <span class="gradient-text">SKILLS.</span></h2>
 
-<section class="content-section wrap" id="skills">
+    <div class="skills-grid">
 
-  <div class="section-title">
-    <div class="eyebrow">My abilities</div>
-    <h2>My Skills</h2>
+      <div class="skill-card">
+        <span class="skill-number">01 — CODE & CREATE</span>
+        <h3>Programming</h3>
+        <div class="skill-tags">
+          <span>Web Development</span>
+          <span>Frontend Development</span>
+          <span>Backend Development</span>
+          <span>Creative Coding</span>
+          <span>UI/UX Design</span>
+          <span>Problem Solving</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-number">02 — GAMING MODE</span>
+        <h3>Gaming</h3>
+        <div class="skill-tags">
+          <span>Competitive Gaming</span>
+          <span>Game Strategy</span>
+          <span>Game Analysis</span>
+          <span>Strategic Thinking</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-number">03 — BUSINESS MINDSET</span>
+        <h3>Business</h3>
+        <div class="skill-tags">
+          <span>Digital Business</span>
+          <span>Business Strategy</span>
+          <span>Entrepreneurship</span>
+          <span>Marketing & Branding</span>
+          <span>Idea Development</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-number">04 — FINANCIAL MARKET</span>
+        <h3>Forex Trading</h3>
+        <span class="learning">CURRENTLY LEARNING</span>
+        <div class="skill-tags">
+          <span>Market Fundamentals</span>
+          <span>Technical Analysis</span>
+          <span>Price Action</span>
+          <span>Risk Management</span>
+          <span>Trading Psychology</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <span class="skill-number">05 — INVESTMENT WORLD</span>
+        <h3>Stock Market</h3>
+        <span class="learning">CURRENTLY LEARNING</span>
+        <div class="skill-tags">
+          <span>Market Fundamentals</span>
+          <span>Stock Analysis</span>
+          <span>Investment Research</span>
+          <span>Portfolio Basics</span>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <div class="grid3">
-
-    <article class="skill">
-      <div class="emoji">💻</div>
-      <h3>Programming</h3>
-      <p>
-        Mempelajari pengembangan website,
-        teknologi, dan solusi digital.
-      </p>
-      <span class="tag">Technology</span>
-    </article>
-
-    <article class="skill">
-      <div class="emoji">🎮</div>
-      <h3>Gaming</h3>
-      <p>
-        Menyukai dunia game, strategi,
-        kreativitas, dan kompetisi.
-      </p>
-      <span class="tag">Gaming</span>
-    </article>
-
-    <article class="skill">
-      <div class="emoji">📈</div>
-      <h3>Business</h3>
-      <p>
-        Tertarik pada ide bisnis,
-        inovasi, dan pengembangan usaha.
-      </p>
-      <span class="tag">Business</span>
-    </article>
-
-  </div>
-
 </section>
 
 <!-- PROJECTS -->
+<section class="section reveal" id="projects">
+  <div class="container">
+    <p class="section-label">03 / WHAT I'VE BUILT</p>
+    <h2 class="section-title">MY <span class="gradient-text">PROJECTS.</span></h2>
 
-<section class="content-section wrap" id="projects">
+    <div class="projects-grid">
 
-  <div class="section-title">
-    <div class="eyebrow">My creations</div>
-    <h2>Featured Projects</h2>
-    <p>Some ideas and digital experiments.</p>
+      <div class="project-card">
+        <div class="project-icon">⌘</div>
+        <div>
+          <h3>Web Development</h3>
+          <p>Website projects and digital experiments built with code.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">◈</div>
+        <div>
+          <h3>Creative Experiments</h3>
+          <p>Exploring creative concepts, interfaces, and digital designs.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">◇</div>
+        <div>
+          <h3>Digital Ideas</h3>
+          <p>Turning ideas into concepts with potential and purpose.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">✧</div>
+        <div>
+          <h3>More Coming Soon</h3>
+          <p>More experiments, projects, and ideas are on the way.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <div class="grid3">
-
-    <article class="project">
-      <div class="emoji">🌐</div>
-      <h3>Personal Portfolio</h3>
-      <p>
-        Website personal dengan desain
-        dark futuristic dan objek 3D.
-      </p>
-      <span class="tag">HTML / CSS / JS</span>
-    </article>
-
-    <article class="project">
-      <div class="emoji">💎</div>
-      <h3>Crystal Universe</h3>
-      <p>
-        Eksperimen objek 3D interaktif
-        menggunakan Three.js.
-      </p>
-      <span class="tag">Three.js</span>
-    </article>
-
-    <article class="project">
-      <div class="emoji">📊</div>
-      <h3>Business Ideas</h3>
-      <p>
-        Eksplorasi ide kreatif
-        dan konsep pengembangan bisnis.
-      </p>
-      <span class="tag">Business</span>
-    </article>
-
-  </div>
-
 </section>
 
 <!-- CONTACT -->
+<section class="section reveal" id="contact">
+  <div class="container">
+    <div class="contact-box">
+      <p class="section-label">04 / GET IN TOUCH</p>
+      <h2>LET'S CREATE<br><span class="gradient-text">SOMETHING GREAT.</span></h2>
+      <p>Have an idea or want to connect? Let's make it happen.</p>
 
-<section class="content-section wrap" id="contact">
+      <div class="contact-links">
+        <a class="btn btn-primary"
+           href="https://wa.me/6281234567890"
+           target="_blank" rel="noopener">
+          WhatsApp ↗
+        </a>
 
-  <div class="contact">
-
-    <div class="eyebrow">Let's connect</div>
-
-    <h2>Let's Build Something Great.</h2>
-
-    <p>
-      Punya ide menarik? Mari terhubung
-      dan berbagi inspirasi.
-    </p>
-
-    <div class="actions" style="justify-content:center">
-
-      <!-- Ganti nomor WhatsApp -->
-      <a class="btn primary"
-         href="https://wa.me/6281234567890"
-         target="_blank" rel="noopener">
-        WhatsApp ↗
-      </a>
-
-      <!-- Ganti email -->
-      <a class="btn"
-         href="mailto:emailkamu@example.com">
-        Email ↗
-      </a>
-
+        <a class="btn btn-outline"
+           href="mailto:emailkamu@example.com">
+          Email Me ↗
+        </a>
+      </div>
     </div>
-
   </div>
-
 </section>
 
-</main>
-
 <footer>
-  <div class="wrap">
-    © <span id="year"></span> Robil Maulana.
-    Crafted with creativity.
-  </div>
+  © 2026 ROBIL MAULANA. ALL RIGHTS RESERVED.
 </footer>
 
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+
 <script>
-
-/* YEAR */
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-/* NAVBAR */
+/* MOBILE MENU */
 
 const menuBtn = document.getElementById("menuBtn");
-const links = document.getElementById("links");
+const navLinks = document.getElementById("navLinks");
 
 menuBtn.addEventListener("click", () => {
-  const opened = links.classList.toggle("show");
-
-  menuBtn.setAttribute("aria-expanded", opened);
+  navLinks.classList.toggle("active");
+  menuBtn.textContent =
+    navLinks.classList.contains("active") ? "×" : "☰";
 });
 
-links.querySelectorAll("a").forEach(link => {
+document.querySelectorAll(".nav-links a").forEach(link => {
   link.addEventListener("click", () => {
-    links.classList.remove("show");
-    menuBtn.setAttribute("aria-expanded", "false");
+    navLinks.classList.remove("active");
+    menuBtn.textContent = "☰";
   });
 });
-
 
 /* SCROLL REVEAL */
 
-const revealTargets = document.querySelectorAll(
-  ".hero > div, .section-title, .about, .skill, .project, .contact"
-);
-
-if ("IntersectionObserver" in window) {
-
-  const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-      entry.target.classList.toggle(
-        "visible",
-        entry.isIntersecting
-      );
-
-    });
-
-  }, { threshold: 0.12 });
-
-  revealTargets.forEach(el => {
-    el.classList.add("reveal");
-    observer.observe(el);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
   });
+}, { threshold: 0.12 });
 
-} else {
-  revealTargets.forEach(el => {
-    el.classList.add("visible");
-  });
-}
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
+});
 
+/* 3D CRYSTAL */
 
-/* THREE JS CRYSTAL UNIVERSE */
-
-const stage = document.getElementById("stage3d");
 const canvas = document.getElementById("crystalCanvas");
-
+const fallback = document.getElementById("crystalFallback");
 const pauseBtn = document.getElementById("pauseBtn");
 const resetBtn = document.getElementById("resetBtn");
 
-if (typeof THREE === "undefined") {
+let scene, camera, renderer;
+let crystalGroup;
+let isPaused = false;
+let isDragging = false;
+let previousX = 0;
+let previousY = 0;
 
-  stage.innerHTML =
-    '<p style="padding:30px">Three.js gagal dimuat. Periksa koneksi internet.</p>';
+if (window.THREE) {
+  try {
+    scene = new THREE.Scene();
 
-} else {
-
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(
-    40, 1, 0.1, 100
-  );
-
-  camera.position.set(0, 0, 7.5);
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true
-  });
-
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio || 1, 2)
-  );
-
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.35;
-
-
-  /* LIGHTING */
-
-  scene.add(
-    new THREE.AmbientLight(0xffffff, 1.1)
-  );
-
-  const lights = [
-    {
-      color: 0xffffff,
-      intensity: 4,
-      position: [3, 4, 5]
-    },
-    {
-      color: 0xbccfff,
-      intensity: 25,
-      position: [-4, 1, -3]
-    },
-    {
-      color: 0xffffff,
-      intensity: 15,
-      position: [2, -4, 4]
-    }
-  ];
-
-  lights.forEach(data => {
-
-    const light = new THREE.PointLight(
-      data.color,
-      data.intensity,
-      20
+    camera = new THREE.PerspectiveCamera(
+      45,
+      1,
+      0.1,
+      100
     );
 
-    light.position.set(...data.position);
-    scene.add(light);
+    camera.position.z = 7;
 
-  });
-
-
-  /* MAIN GROUP */
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-
-  /* CRYSTAL GEOMETRY */
-
-  const sides = 8;
-  const vertices = [];
-
-  const top = [0, 1.65, 0];
-  const bottom = [0, -1.55, 0];
-
-  const girdle = [];
-  const lower = [];
-
-  for (let i = 0; i < sides; i++) {
-
-    const angle =
-      (Math.PI * 2 * i / sides) + Math.PI / 8;
-
-    girdle.push([
-      Math.cos(angle) * 1.0,
-      0.25,
-      Math.sin(angle) * 1.0
-    ]);
-
-    lower.push([
-      Math.cos(angle) * 0.56,
-      -0.85,
-      Math.sin(angle) * 0.56
-    ]);
-
-  }
-
-  function triangle(a, b, c) {
-
-    vertices.push(
-      ...a,
-      ...b,
-      ...c
-    );
-
-  }
-
-  for (let i = 0; i < sides; i++) {
-
-    const next = (i + 1) % sides;
-
-    triangle(top, girdle[i], girdle[next]);
-
-    triangle(girdle[i], lower[i], girdle[next]);
-
-    triangle(girdle[next], lower[i], lower[next]);
-
-    triangle(lower[i], bottom, lower[next]);
-
-  }
-
-  const geometry = new THREE.BufferGeometry();
-
-  geometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute(vertices, 3)
-  );
-
-  geometry.computeVertexNormals();
-
-
-  /* CRYSTAL MATERIAL */
-
-  const crystalMaterial =
-    new THREE.MeshPhysicalMaterial({
-
-      color: 0xdce8ff,
-
-      metalness: 0.25,
-
-      roughness: 0.09,
-
-      transmission: 0.65,
-
-      thickness: 1.8,
-
-      ior: 1.5,
-
-      clearcoat: 1,
-
-      clearcoatRoughness: 0.03,
-
-      side: THREE.DoubleSide,
-
-      flatShading: true
-
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true
     });
 
-  const crystal = new THREE.Mesh(
-    geometry,
-    crystalMaterial
-  );
+    renderer.setPixelRatio(
+      Math.min(window.devicePixelRatio, 2)
+    );
 
-  group.add(crystal);
+    renderer.setClearColor(0x000000, 0);
 
+    const ambient = new THREE.AmbientLight(0xffffff, 1.1);
+    scene.add(ambient);
 
-  /* CRYSTAL EDGES */
+    const light1 = new THREE.PointLight(0xffffff, 90);
+    light1.position.set(4, 4, 5);
+    scene.add(light1);
 
-  const edges = new THREE.LineSegments(
+    const light2 = new THREE.PointLight(0xaaaaaa, 60);
+    light2.position.set(-4, -3, 2);
+    scene.add(light2);
 
-    new THREE.EdgesGeometry(geometry),
+    const light3 = new THREE.PointLight(0xffffff, 40);
+    light3.position.set(0, 4, -5);
+    scene.add(light3);
 
-    new THREE.LineBasicMaterial({
+    crystalGroup = new THREE.Group();
+    scene.add(crystalGroup);
+
+    // Main crystal
+    const crystalGeometry = new THREE.OctahedronGeometry(2, 0);
+
+    const crystalMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xd9d9e0,
+      metalness: 0.82,
+      roughness: 0.16,
+      flatShading: true,
+      transparent: true,
+      opacity: 0.95,
+      side: THREE.DoubleSide
+    });
+
+    const crystal = new THREE.Mesh(
+      crystalGeometry,
+      crystalMaterial
+    );
+
+    crystalGroup.add(crystal);
+
+    // Crystal wireframe
+    const edges = new THREE.EdgesGeometry(crystalGeometry);
+
+    const wireMaterial = new THREE.LineBasicMaterial({
       color: 0xffffff,
       transparent: true,
-      opacity: 0.9
-    })
+      opacity: 0.65
+    });
 
-  );
+    const wire = new THREE.LineSegments(edges, wireMaterial);
+    wire.scale.setScalar(1.006);
+    crystalGroup.add(wire);
 
-  group.add(edges);
+    // Inner core
+    const coreGeometry = new THREE.IcosahedronGeometry(0.75, 1);
 
-
-  /* INNER CORE */
-
-  const core = new THREE.Mesh(
-
-    new THREE.OctahedronGeometry(0.43, 0),
-
-    new THREE.MeshStandardMaterial({
-
-      color: 0xffffff,
-
-      metalness: 0.8,
-
-      roughness: 0.1,
-
-      emissive: 0x555555,
-
-      emissiveIntensity: 0.4
-
-    })
-
-  );
-
-  group.add(core);
-
-
-  /* ORBIT RINGS */
-
-  const ring1 = new THREE.Mesh(
-
-    new THREE.TorusGeometry(
-      2.05, 0.018, 12, 180
-    ),
-
-    new THREE.MeshStandardMaterial({
-
+    const coreMaterial = new THREE.MeshStandardMaterial({
       color: 0xffffff,
       metalness: 1,
-      roughness: 0.17
+      roughness: 0.12,
+      emissive: 0x333333
+    });
 
-    })
+    const core = new THREE.Mesh(coreGeometry, coreMaterial);
+    crystalGroup.add(core);
 
-  );
+    // Orbit rings
+    const ringMaterial = new THREE.MeshBasicMaterial({
+      color: 0xaaaaaa,
+      transparent: true,
+      opacity: 0.5
+    });
 
-  ring1.rotation.set(1.1, 0.2, -0.3);
+    const ring1 = new THREE.Mesh(
+      new THREE.TorusGeometry(2.6, 0.008, 8, 120),
+      ringMaterial
+    );
 
-  group.add(ring1);
+    ring1.rotation.x = 1.2;
+    ring1.rotation.y = 0.5;
+    crystalGroup.add(ring1);
 
+    const ring2 = new THREE.Mesh(
+      new THREE.TorusGeometry(2.85, 0.006, 8, 120),
+      ringMaterial
+    );
 
-  const ring2 = new THREE.Mesh(
+    ring2.rotation.x = 0.5;
+    ring2.rotation.y = 1.1;
+    crystalGroup.add(ring2);
 
-    new THREE.TorusGeometry(
-      2.2, 0.012, 10, 180
-    ),
+    // Particle field
+    const particleCount = 300;
+    const positions = new Float32Array(particleCount * 3);
 
-    new THREE.MeshStandardMaterial({
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 10;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+    }
 
-      color: 0x999999,
-      metalness: 1,
-      roughness: 0.2
+    const particleGeometry = new THREE.BufferGeometry();
+    particleGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(positions, 3)
+    );
 
-    })
-
-  );
-
-  ring2.rotation.set(0.4, 1, 0.7);
-
-  group.add(ring2);
-
-
-  /* ORBIT LIGHT */
-
-  const bead = new THREE.Mesh(
-
-    new THREE.SphereGeometry(0.075, 24, 24),
-
-    new THREE.MeshBasicMaterial({
-      color: 0xffffff
-    })
-
-  );
-
-  ring1.add(bead);
-  bead.position.set(2.05, 0, 0);
-
-
-  /* PARTICLES */
-
-  const particleCount = 550;
-  const particlePositions = new Float32Array(
-    particleCount * 3
-  );
-
-  for (let i = 0; i < particleCount; i++) {
-
-    particlePositions[i * 3] =
-      (Math.random() - 0.5) * 12;
-
-    particlePositions[i * 3 + 1] =
-      (Math.random() - 0.5) * 9;
-
-    particlePositions[i * 3 + 2] =
-      (Math.random() - 0.5) * 8;
-
-  }
-
-  const particleGeometry = new THREE.BufferGeometry();
-
-  particleGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(particlePositions, 3)
-  );
-
-  const particleMaterial =
-    new THREE.PointsMaterial({
-
+    const particleMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
-
       size: 0.018,
-
       transparent: true,
-
-      opacity: 0.7
-
+      opacity: 0.65
     });
 
-  const particles = new THREE.Points(
-    particleGeometry,
-    particleMaterial
-  );
-
-  scene.add(particles);
-
-
-  /* DRAG INTERACTION */
-
-  let dragging = false;
-
-  let lastX = 0;
-  let lastY = 0;
-
-  let rotationX = -0.12;
-  let rotationY = 0.25;
-
-  const initialX = rotationX;
-  const initialY = rotationY;
-
-  stage.addEventListener("pointerdown", event => {
-
-    dragging = true;
-
-    lastX = event.clientX;
-    lastY = event.clientY;
-
-    stage.setPointerCapture(event.pointerId);
-
-  });
-
-  stage.addEventListener("pointermove", event => {
-
-    if (!dragging) return;
-
-    const dx = event.clientX - lastX;
-    const dy = event.clientY - lastY;
-
-    rotationY += dx * 0.008;
-    rotationX += dy * 0.008;
-
-    rotationX = Math.max(
-      -1.3,
-      Math.min(1.3, rotationX)
+    const particles = new THREE.Points(
+      particleGeometry,
+      particleMaterial
     );
 
-    lastX = event.clientX;
-    lastY = event.clientY;
+    scene.add(particles);
 
-  });
+    fallback.style.display = "none";
 
-  function stopDrag() {
-    dragging = false;
-  }
+    // Resize
+    function resizeCrystal() {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
 
-  stage.addEventListener("pointerup", stopDrag);
-  stage.addEventListener("pointercancel", stopDrag);
-  stage.addEventListener("lostpointercapture", stopDrag);
+      if (!width || !height) return;
 
+      camera.aspect = width / height;
+      camera.position.z = width < 500 ? 8 : 7;
+      camera.updateProjectionMatrix();
 
-  /* BUTTON CONTROLS */
+      renderer.setSize(width, height, false);
+    }
 
-  let paused = false;
+    const resizeObserver = new ResizeObserver(resizeCrystal);
+    resizeObserver.observe(canvas.parentElement);
+    resizeCrystal();
 
-  pauseBtn.addEventListener("click", () => {
+    // Drag rotation
+    canvas.addEventListener("pointerdown", event => {
+      isDragging = true;
+      previousX = event.clientX;
+      previousY = event.clientY;
+      canvas.setPointerCapture(event.pointerId);
+    });
 
-    paused = !paused;
+    canvas.addEventListener("pointermove", event => {
+      if (!isDragging) return;
 
-    pauseBtn.textContent =
-      paused ? "▶ Play" : "❚❚ Pause";
+      const deltaX = event.clientX - previousX;
+      const deltaY = event.clientY - previousY;
 
-  });
+      crystalGroup.rotation.y += deltaX * 0.008;
+      crystalGroup.rotation.x += deltaY * 0.008;
 
-  resetBtn.addEventListener("click", () => {
+      previousX = event.clientX;
+      previousY = event.clientY;
+    });
 
-    rotationX = initialX;
-    rotationY = initialY;
+    canvas.addEventListener("pointerup", () => {
+      isDragging = false;
+    });
 
-    crystal.position.set(0, 0, 0);
+    canvas.addEventListener("pointercancel", () => {
+      isDragging = false;
+    });
 
-    ring1.rotation.set(1.1, 0.2, -0.3);
-    ring2.rotation.set(0.4, 1, 0.7);
+    // Controls
+    pauseBtn.addEventListener("click", () => {
+      isPaused = !isPaused;
+      pauseBtn.textContent = isPaused ? "▶ PLAY" : "Ⅱ PAUSE";
+    });
 
-  });
+    resetBtn.addEventListener("click", () => {
+      crystalGroup.rotation.set(0, 0, 0);
+    });
 
+    // Animation
+    const clock = new THREE.Clock();
 
-  /* RESPONSIVE */
+    function animate() {
+      requestAnimationFrame(animate);
 
-  function resize() {
+      const delta = Math.min(clock.getDelta(), 0.05);
 
-    const width = stage.clientWidth;
-    const height = stage.clientHeight;
+      if (!isPaused && !isDragging) {
+        crystalGroup.rotation.y += delta * 0.28;
+        crystalGroup.rotation.x += delta * 0.12;
+      }
 
-    if (!width || !height) return;
+      if (!isPaused) {
+        particles.rotation.y += delta * 0.018;
+      }
 
-    renderer.setSize(width, height, false);
-
-    camera.aspect = width / height;
-
-    camera.updateProjectionMatrix();
-
-  }
-
-  const resizeObserver = new ResizeObserver(resize);
-
-  resizeObserver.observe(stage);
-
-  resize();
-
-
-  /* ANIMATION */
-
-  const clock = new THREE.Clock();
-
-  let animationId;
-
-  function animate() {
-
-    animationId = requestAnimationFrame(animate);
-
-    if (paused) {
       renderer.render(scene, camera);
-      return;
     }
 
-    const time = clock.getElapsedTime();
+    animate();
 
-    if (!dragging) {
-      rotationY += 0.002;
-    }
-
-    group.rotation.set(
-      rotationX,
-      rotationY,
-      0
-    );
-
-    crystal.position.y =
-      Math.sin(time * 1.1) * 0.07;
-
-    core.rotation.x = time * 0.4;
-    core.rotation.y = time * 0.7;
-
-    ring1.rotation.z += 0.0025;
-    ring2.rotation.y += 0.0018;
-
-    particles.rotation.y = time * 0.008;
-
-    renderer.render(scene, camera);
-
+  } catch (error) {
+    console.error("3D Crystal Error:", error);
+    fallback.style.display = "block";
+    canvas.style.display = "none";
   }
-
-  animate();
-
-  /* CLEANUP WHEN PAGE IS LEFT */
-
-  window.addEventListener("pagehide", () => {
-
-    cancelAnimationFrame(animationId);
-
-    resizeObserver.disconnect();
-
-    renderer.dispose();
-
-    geometry.dispose();
-    crystalMaterial.dispose();
-    particleGeometry.dispose();
-    particleMaterial.dispose();
-
-  });
-
+} else {
+  fallback.style.display = "block";
+  canvas.style.display = "none";
 }
-
 </script>
 
 </body>
