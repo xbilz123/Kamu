@@ -7,16 +7,20 @@
 <meta name="theme-color" content="#050505">
 <title>Robil Maulana | Portfolio</title>
 
+<!-- FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- THREE JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+
 <style>
 :root {
   --bg: #050505;
-  --surface: #101010;
-  --silver: #d8d8d8;
-  --muted: #858585;
+  --card: #101010;
+  --silver: #d5d5d5;
+  --muted: #888;
   --line: rgba(255,255,255,.12);
   --white: #fff;
 }
@@ -39,7 +43,7 @@ body {
   overflow-x: hidden;
 }
 
-/* BACKGROUND GRID */
+/* FUTURISTIC GRID BACKGROUND */
 
 body::before {
   content: "";
@@ -66,8 +70,8 @@ body::after {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 button {
@@ -87,8 +91,8 @@ button {
   color: #999;
   font-size: 12px;
   letter-spacing: 4px;
-  text-transform: uppercase;
   margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
 .section-title {
@@ -114,7 +118,7 @@ nav {
   width: 100%;
   z-index: 100;
   border-bottom: 1px solid rgba(255,255,255,.08);
-  background: rgba(5,5,5,.78);
+  background: rgba(5,5,5,.82);
   backdrop-filter: blur(18px);
 }
 
@@ -236,7 +240,6 @@ nav {
   border-radius: 5px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: .5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -284,6 +287,7 @@ nav {
   height: 100%;
   cursor: grab;
   z-index: 2;
+  touch-action: pan-y;
 }
 
 #crystalCanvas:active {
@@ -332,7 +336,9 @@ nav {
 }
 
 @keyframes float {
-  50% { transform: translateY(-20px) rotate(10deg); }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
 }
 
 /* ABOUT */
@@ -515,7 +521,7 @@ footer {
   letter-spacing: 1px;
 }
 
-/* REVEAL */
+/* SCROLL REVEAL */
 
 .reveal {
   opacity: 0;
@@ -841,9 +847,6 @@ footer {
   © 2026 ROBIL MAULANA. ALL RIGHTS RESERVED.
 </footer>
 
-<!-- THREE.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
-
 <script>
 /* MOBILE MENU */
 
@@ -885,8 +888,6 @@ const fallback = document.getElementById("crystalFallback");
 const pauseBtn = document.getElementById("pauseBtn");
 const resetBtn = document.getElementById("resetBtn");
 
-let scene, camera, renderer;
-let crystalGroup;
 let isPaused = false;
 let isDragging = false;
 let previousX = 0;
@@ -894,31 +895,21 @@ let previousY = 0;
 
 if (window.THREE) {
   try {
-    scene = new THREE.Scene();
+    const scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(
-      45,
-      1,
-      0.1,
-      100
-    );
-
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.z = 7;
 
-    renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
       alpha: true,
       antialias: true
     });
 
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio, 2)
-    );
-
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 1.1);
-    scene.add(ambient);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.1));
 
     const light1 = new THREE.PointLight(0xffffff, 90);
     light1.position.set(4, 4, 5);
@@ -932,10 +923,11 @@ if (window.THREE) {
     light3.position.set(0, 4, -5);
     scene.add(light3);
 
-    crystalGroup = new THREE.Group();
+    const crystalGroup = new THREE.Group();
     scene.add(crystalGroup);
 
-    // Main crystal
+    // MAIN CRYSTAL
+
     const crystalGeometry = new THREE.OctahedronGeometry(2, 0);
 
     const crystalMaterial = new THREE.MeshPhysicalMaterial({
@@ -955,7 +947,8 @@ if (window.THREE) {
 
     crystalGroup.add(crystal);
 
-    // Crystal wireframe
+    // CRYSTAL WIREFRAME
+
     const edges = new THREE.EdgesGeometry(crystalGeometry);
 
     const wireMaterial = new THREE.LineBasicMaterial({
@@ -968,7 +961,8 @@ if (window.THREE) {
     wire.scale.setScalar(1.006);
     crystalGroup.add(wire);
 
-    // Inner core
+    // INNER CORE
+
     const coreGeometry = new THREE.IcosahedronGeometry(0.75, 1);
 
     const coreMaterial = new THREE.MeshStandardMaterial({
@@ -981,7 +975,8 @@ if (window.THREE) {
     const core = new THREE.Mesh(coreGeometry, coreMaterial);
     crystalGroup.add(core);
 
-    // Orbit rings
+    // ORBIT RINGS
+
     const ringMaterial = new THREE.MeshBasicMaterial({
       color: 0xaaaaaa,
       transparent: true,
@@ -1006,7 +1001,8 @@ if (window.THREE) {
     ring2.rotation.y = 1.1;
     crystalGroup.add(ring2);
 
-    // Particle field
+    // PARTICLES
+
     const particleCount = 300;
     const positions = new Float32Array(particleCount * 3);
 
@@ -1017,6 +1013,7 @@ if (window.THREE) {
     }
 
     const particleGeometry = new THREE.BufferGeometry();
+
     particleGeometry.setAttribute(
       "position",
       new THREE.BufferAttribute(positions, 3)
@@ -1038,7 +1035,8 @@ if (window.THREE) {
 
     fallback.style.display = "none";
 
-    // Resize
+    // RESIZE
+
     function resizeCrystal() {
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
@@ -1056,7 +1054,8 @@ if (window.THREE) {
     resizeObserver.observe(canvas.parentElement);
     resizeCrystal();
 
-    // Drag rotation
+    // DRAG ROTATION
+
     canvas.addEventListener("pointerdown", event => {
       isDragging = true;
       previousX = event.clientX;
@@ -1085,17 +1084,21 @@ if (window.THREE) {
       isDragging = false;
     });
 
-    // Controls
+    // PAUSE
+
     pauseBtn.addEventListener("click", () => {
       isPaused = !isPaused;
       pauseBtn.textContent = isPaused ? "▶ PLAY" : "Ⅱ PAUSE";
     });
 
+    // RESET
+
     resetBtn.addEventListener("click", () => {
       crystalGroup.rotation.set(0, 0, 0);
     });
 
-    // Animation
+    // ANIMATION
+
     const clock = new THREE.Clock();
 
     function animate() {
