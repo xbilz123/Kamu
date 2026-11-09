@@ -5,24 +5,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
-<title>Portfolio | Robil Maulana</title>
 
-<!-- Three.js untuk objek 3D -->
+<title>Robil Maulana | Portfolio</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
 
 <style>
 :root {
   --bg: #080808;
-  --panel: #151515;
-  --text: #f5f5f5;
-  --muted: #a3a3a3;
+  --panel: #141414;
+  --white: #f5f5f5;
+  --silver: #aaa;
   --line: rgba(255,255,255,.13);
 }
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -31,16 +31,21 @@ html {
 
 body {
   background:
-    radial-gradient(circle at 85% 5%, rgba(255,255,255,.07), transparent 28rem),
+    radial-gradient(circle at 50% 10%, #202020 0, transparent 38rem),
     var(--bg);
-  color: var(--text);
+  color: var(--white);
   font-family: Inter, system-ui, Arial, sans-serif;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  font: inherit;
 }
 
 .wrap {
@@ -53,9 +58,9 @@ a {
 header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: rgba(8,8,8,.88);
-  backdrop-filter: blur(16px);
+  z-index: 20;
+  background: rgba(8,8,8,.85);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -67,18 +72,20 @@ nav {
 }
 
 .brand {
-  font-weight: 850;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 .brand span {
-  color: #aaa;
+  color: #888;
 }
 
 .links {
   display: flex;
   gap: 28px;
-  color: var(--muted);
+  color: #aaa;
+  font-size: .92rem;
 }
 
 .links a:hover {
@@ -87,18 +94,18 @@ nav {
 
 .menu {
   display: none;
-  background: none;
+  padding: 8px 13px;
   border: 1px solid var(--line);
-  color: white;
   border-radius: 10px;
-  padding: 8px 12px;
-  font-size: 1.2rem;
+  background: transparent;
+  color: white;
+  cursor: pointer;
 }
 
 /* HERO */
 
 .hero {
-  min-height: 650px;
+  min-height: 640px;
   display: grid;
   grid-template-columns: 1.1fr .9fr;
   align-items: center;
@@ -107,108 +114,116 @@ nav {
 }
 
 .eyebrow {
-  color: #ccc;
-  font-size: .82rem;
-  font-weight: 800;
-  letter-spacing: 2px;
+  color: #aaa;
   text-transform: uppercase;
+  font-size: .78rem;
+  letter-spacing: 3px;
+  font-weight: 800;
 }
 
 h1 {
-  font-size: clamp(2.7rem, 6vw, 5rem);
+  font-size: clamp(2.7rem,6vw,5rem);
   line-height: 1.05;
   letter-spacing: -2px;
-  margin: 16px 0;
+  margin: 18px 0;
 }
 
 .gradient {
-  background: linear-gradient(100deg,#fff,#999);
-  -webkit-background-clip: text;
+  background: linear-gradient(110deg,#fff,#777);
   background-clip: text;
+  -webkit-background-clip: text;
   color: transparent;
 }
 
 .intro {
-  color: var(--muted);
+  color: #aaa;
   font-size: 1.08rem;
-  max-width: 590px;
+  max-width: 550px;
 }
 
 .actions {
   display: flex;
-  gap: 14px;
+  gap: 13px;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 28px;
 }
 
 .btn {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 12px 20px;
-  border-radius: 13px;
-  font-weight: 750;
+  border-radius: 12px;
   border: 1px solid var(--line);
-  transition: .2s;
+  font-weight: 750;
+  transition: .25s;
+  cursor: pointer;
 }
 
 .btn.primary {
-  background: linear-gradient(110deg,#fff,#bbb);
   color: #080808;
-  border: 0;
+  background: linear-gradient(120deg,#fff,#999);
+  border: none;
 }
 
 .btn:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px #ffffff18;
 }
 
-/* TEMPAT FOTO */
+/* PROFILE */
 
 .portrait {
   width: min(300px,80vw);
   aspect-ratio: 1;
   margin: auto;
-  border-radius: 34px;
-  background: linear-gradient(145deg,#333,#111 55%,#555);
-  border: 1px solid rgba(255,255,255,.22);
   display: grid;
   place-items: center;
-  position: relative;
-  overflow: hidden;
+  border-radius: 35px;
+  background:
+    radial-gradient(circle at 30% 20%,#555,transparent 55%),
+    linear-gradient(145deg,#292929,#090909);
+  border: 1px solid #ffffff35;
+  box-shadow: 0 20px 80px #ffffff0c;
 }
 
 .avatar {
-  font-size: 6rem;
-  font-weight: 900;
-  z-index: 1;
+  font-size: 5.5rem;
+  font-weight: 950;
+  letter-spacing: -7px;
+  background: linear-gradient(145deg,#fff,#666);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-/* KRISTAL 3D */
+/* CRYSTAL SECTION */
 
 .crystal-section {
-  padding: 70px 0;
+  padding: 85px 0;
   text-align: center;
 }
 
 .crystal-section h2 {
-  font-size: 2rem;
-  margin: 8px 0;
+  font-size: clamp(2rem,5vw,3rem);
+  margin: 10px 0;
 }
 
 .crystal-section p {
-  color: var(--muted);
+  color: #999;
 }
 
 .stage-3d {
   width: 100%;
-  height: 430px;
-  margin: 25px auto 12px;
+  height: 480px;
+  margin: 30px auto 15px;
+  border: 1px solid var(--line);
+  border-radius: 25px;
   position: relative;
   overflow: hidden;
-  border-radius: 26px;
-  border: 1px solid var(--line);
   background:
-    radial-gradient(ellipse at center,rgba(255,255,255,.14),transparent 65%);
+    radial-gradient(ellipse at center,#33333355,transparent 65%),
+    linear-gradient(145deg,#111,#080808);
   cursor: grab;
   touch-action: pan-y;
 }
@@ -223,14 +238,45 @@ h1 {
   height: 100%;
 }
 
-.drag-note {
-  font-size: .88rem;
-  color: #bbb;
+.stage-label {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  color: #888;
+  font-size: .72rem;
+  letter-spacing: 2px;
+  pointer-events: none;
 }
 
-/* SECTION */
+.stage-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px auto;
+}
 
-section {
+.control-btn {
+  padding: 9px 17px;
+  color: #ddd;
+  background: #181818;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.control-btn:hover {
+  background: #333;
+}
+
+.drag-note {
+  color: #888;
+  font-size: .85rem;
+}
+
+/* GENERAL SECTIONS */
+
+section.content-section {
   padding: 75px 0;
 }
 
@@ -245,13 +291,13 @@ section {
 }
 
 .section-title p {
-  color: var(--muted);
+  color: #999;
 }
 
 .about,
-.project,
-.skill {
-  background: rgba(21,21,21,.9);
+.skill,
+.project {
+  background: rgba(20,20,20,.85);
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 25px;
@@ -260,8 +306,8 @@ section {
 .about {
   max-width: 850px;
   margin: auto;
-  color: var(--muted);
   text-align: center;
+  color: #aaa;
 }
 
 .about strong {
@@ -276,16 +322,16 @@ section {
 
 .skill h3,
 .project h3 {
-  margin: 10px 0 5px;
+  margin: 12px 0 5px;
 }
 
 .skill p,
 .project p {
-  color: var(--muted);
+  color: #999;
 }
 
 .emoji {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 .project {
@@ -293,76 +339,85 @@ section {
 }
 
 .project:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255,255,255,.4);
+  transform: translateY(-6px);
+  border-color: #777;
 }
 
 .tag {
   display: inline-block;
   margin-top: 16px;
-  padding: 5px 10px;
-  border-radius: 99px;
-  background: rgba(255,255,255,.1);
-  color: #ddd;
+  padding: 5px 12px;
+  background: #ffffff12;
+  border-radius: 50px;
   font-size: .78rem;
+  color: #ccc;
 }
 
-/* KONTAK */
+/* CONTACT */
 
 .contact {
   text-align: center;
-  background: linear-gradient(130deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+  padding: 45px 20px;
   border: 1px solid var(--line);
-  border-radius: 26px;
-  padding: 42px 20px;
+  border-radius: 25px;
+  background: linear-gradient(140deg,#ffffff13,#ffffff03);
 }
 
 .contact p {
-  color: var(--muted);
+  color: #999;
   margin-top: 10px;
 }
 
 footer {
   padding: 28px 0;
-  color: var(--muted);
   text-align: center;
+  color: #888;
   border-top: 1px solid var(--line);
 }
 
-/* SCROLL REVEAL DUA ARAH */
+/* REVEAL */
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity .8s ease,
-    transform .8s cubic-bezier(.2,.7,.2,1);
+  transform: translateY(25px);
+  transition: .8s ease;
 }
 
-.reveal.is-visible {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 @media(prefers-reduced-motion:reduce) {
   html { scroll-behavior: auto; }
+
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
   }
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
+
+/* RESPONSIVE */
 
 @media(max-width:760px) {
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 40px;
   }
 
-  .intro { margin: auto; }
+  .intro {
+    margin: auto;
+  }
 
-  .actions { justify-content: center; }
+  .actions {
+    justify-content: center;
+  }
 
   .links {
     display: none;
@@ -370,19 +425,26 @@ footer {
     top: 71px;
     left: 0;
     right: 0;
-    padding: 20px 5%;
     background: #111;
+    padding: 22px 5%;
     flex-direction: column;
-    gap: 16px;
   }
 
-  .links.show { display: flex; }
+  .links.show {
+    display: flex;
+  }
 
-  .menu { display: block; }
+  .menu {
+    display: block;
+  }
 
-  .grid3 { grid-template-columns: 1fr; }
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
 
-  .stage-3d { height: 350px; }
+  .stage-3d {
+    height: 360px;
+  }
 }
 </style>
 </head>
@@ -391,20 +453,26 @@ footer {
 
 <header>
 <nav class="wrap">
-  <a class="brand" href="#home">PORTO<span>FOLIO.</span></a>
+
+  <a class="brand" href="#home">
+    ROBIL<span>MAULANA.</span>
+  </a>
 
   <div class="links" id="links">
     <a href="#home">Beranda</a>
+    <a href="#crystal">Crystal 3D</a>
     <a href="#about">Tentang</a>
     <a href="#skills">Keahlian</a>
     <a href="#projects">Proyek</a>
     <a href="#contact">Kontak</a>
   </div>
 
-  <button class="menu"
-    onclick="document.getElementById('links').classList.toggle('show')">
+  <button class="menu" id="menuBtn"
+    aria-label="Buka menu"
+    aria-expanded="false">
     ☰
   </button>
+
 </nav>
 </header>
 
@@ -415,164 +483,224 @@ footer {
 <section class="hero wrap" id="home">
 
   <div>
-    <div class="eyebrow">Halo, selamat datang di portfolio saya</div>
+    <div class="eyebrow">
+      Welcome to my digital world
+    </div>
 
     <h1>
-      Saya <span class="gradient">Robil Maulana</span><br>
-      Personal Portfolio
+      I'm <span class="gradient">Robil Maulana</span>
+      <br>Creative Thinker.
     </h1>
 
     <p class="intro">
-      Saya seorang [Profesi Kamu] yang tertarik pada teknologi,
-      kreativitas, dan membangun hal-hal bermanfaat.
+      Programmer, gamer, dan penggiat bisnis.
+      Saya senang mengeksplorasi teknologi,
+      membangun ide kreatif, dan menciptakan
+      sesuatu yang memiliki nilai.
     </p>
 
     <div class="actions">
-      <a class="btn primary" href="#projects">Lihat Proyek ↗</a>
-      <a class="btn" href="#contact">Hubungi Saya</a>
+      <a class="btn primary" href="#projects">
+        Explore Projects ↗
+      </a>
+
+      <a class="btn" href="#contact">
+        Contact Me
+      </a>
     </div>
   </div>
 
   <div class="portrait">
-    <div class="avatar">NK</div>
+    <div class="avatar">RM</div>
   </div>
 
 </section>
 
-<!-- KRISTAL 3D -->
+<!-- CRYSTAL 3D -->
 
 <section class="crystal-section wrap" id="crystal">
 
-  <div class="eyebrow">Interactive 3D Object</div>
+  <div class="eyebrow">Interactive 3D Experience</div>
 
-  <h2>Crystal Universe</h2>
+  <h2>Crystal <span class="gradient">Universe</span></h2>
 
-  <p>Kristal tiga dimensi dengan cincin orbit yang bergerak.</p>
+  <p>
+    Explore the beauty of futuristic geometry.
+  </p>
 
   <div class="stage-3d" id="stage3d">
+
+    <div class="stage-label">
+      OBJECT 001 / CRYSTAL CORE
+    </div>
+
     <canvas id="crystalCanvas"></canvas>
+
+  </div>
+
+  <div class="stage-controls">
+
+    <button class="control-btn" id="pauseBtn">
+      ❚❚ Pause
+    </button>
+
+    <button class="control-btn" id="resetBtn">
+      ↻ Reset
+    </button>
+
   </div>
 
   <div class="drag-note">
-    Geser dengan jari atau mouse untuk memutar kristal
+    Drag with your mouse or finger to rotate the crystal.
   </div>
 
 </section>
 
-<!-- TENTANG -->
+<!-- ABOUT -->
 
-<section class="wrap" id="about">
+<section class="content-section wrap" id="about">
 
   <div class="section-title">
-    <div class="eyebrow">Sedikit tentang saya</div>
-    <h2>Tentang Saya</h2>
+    <div class="eyebrow">Who am I?</div>
+    <h2>About Me</h2>
   </div>
 
   <div class="about">
     <p>
-      Perkenalkan, saya <strong>Nama Kamu</strong>.
-      Saya senang belajar hal baru dan mengembangkan kemampuan
-      di bidang <strong>[Bidang Kamu]</strong>.
-      Saya percaya bahwa proses belajar dan konsistensi
-      dapat menghasilkan karya yang baik.
+      Halo! Saya <strong>Robil Maulana</strong>.
+      Saya memiliki ketertarikan pada dunia
+      <strong>programming, gaming, dan bisnis</strong>.
+      Saya senang mempelajari teknologi baru,
+      mengembangkan kemampuan, dan mengubah
+      ide menjadi karya digital.
     </p>
   </div>
 
 </section>
 
-<!-- KEAHLIAN -->
+<!-- SKILLS -->
 
-<section class="wrap" id="skills">
+<section class="content-section wrap" id="skills">
 
   <div class="section-title">
-    <div class="eyebrow">Apa yang saya kuasai</div>
-    <h2>Keahlian Saya</h2>
+    <div class="eyebrow">My abilities</div>
+    <h2>My Skills</h2>
   </div>
 
   <div class="grid3">
 
     <article class="skill">
       <div class="emoji">💻</div>
-      <h3>Web Development</h3>
-      <p>HTML, CSS, JavaScript, dan pengembangan website.</p>
+      <h3>Programming</h3>
+      <p>
+        Mempelajari pengembangan website,
+        teknologi, dan solusi digital.
+      </p>
+      <span class="tag">Technology</span>
     </article>
 
     <article class="skill">
-      <div class="emoji">🎨</div>
-      <h3>Desain Kreatif</h3>
-      <p>Desain visual, tata letak, dan konten digital.</p>
+      <div class="emoji">🎮</div>
+      <h3>Gaming</h3>
+      <p>
+        Menyukai dunia game, strategi,
+        kreativitas, dan kompetisi.
+      </p>
+      <span class="tag">Gaming</span>
     </article>
 
     <article class="skill">
-      <div class="emoji">🧠</div>
-      <h3>Problem Solving</h3>
-      <p>Belajar, mencari solusi, dan bekerja terstruktur.</p>
+      <div class="emoji">📈</div>
+      <h3>Business</h3>
+      <p>
+        Tertarik pada ide bisnis,
+        inovasi, dan pengembangan usaha.
+      </p>
+      <span class="tag">Business</span>
     </article>
 
   </div>
 
 </section>
 
-<!-- PROYEK -->
+<!-- PROJECTS -->
 
-<section class="wrap" id="projects">
+<section class="content-section wrap" id="projects">
 
   <div class="section-title">
-    <div class="eyebrow">Beberapa hasil karya</div>
-    <h2>Proyek Pilihan</h2>
+    <div class="eyebrow">My creations</div>
+    <h2>Featured Projects</h2>
+    <p>Some ideas and digital experiments.</p>
   </div>
 
   <div class="grid3">
 
     <article class="project">
       <div class="emoji">🌐</div>
-      <h3>Website Pribadi</h3>
-      <p>Website untuk memperkenalkan profil diri.</p>
-      <span class="tag">Website</span>
+      <h3>Personal Portfolio</h3>
+      <p>
+        Website personal dengan desain
+        dark futuristic dan objek 3D.
+      </p>
+      <span class="tag">HTML / CSS / JS</span>
     </article>
 
     <article class="project">
-      <div class="emoji">📱</div>
-      <h3>Desain Aplikasi</h3>
-      <p>Konsep tampilan aplikasi yang responsif.</p>
-      <span class="tag">UI Design</span>
+      <div class="emoji">💎</div>
+      <h3>Crystal Universe</h3>
+      <p>
+        Eksperimen objek 3D interaktif
+        menggunakan Three.js.
+      </p>
+      <span class="tag">Three.js</span>
     </article>
 
     <article class="project">
-      <div class="emoji">⚡</div>
-      <h3>Proyek Lainnya</h3>
-      <p>Tempat menampilkan karya dan pengalaman.</p>
-      <span class="tag">Eksperimen</span>
+      <div class="emoji">📊</div>
+      <h3>Business Ideas</h3>
+      <p>
+        Eksplorasi ide kreatif
+        dan konsep pengembangan bisnis.
+      </p>
+      <span class="tag">Business</span>
     </article>
 
   </div>
 
 </section>
 
-<!-- KONTAK -->
+<!-- CONTACT -->
 
-<section class="wrap" id="contact">
+<section class="content-section wrap" id="contact">
 
   <div class="contact">
-    <div class="eyebrow">Mari terhubung</div>
 
-    <h2>Punya ide atau ingin bekerja sama?</h2>
+    <div class="eyebrow">Let's connect</div>
 
-    <p>Silakan hubungi saya melalui WhatsApp atau email.</p>
+    <h2>Let's Build Something Great.</h2>
+
+    <p>
+      Punya ide menarik? Mari terhubung
+      dan berbagi inspirasi.
+    </p>
 
     <div class="actions" style="justify-content:center">
 
+      <!-- Ganti nomor WhatsApp -->
       <a class="btn primary"
-        href="https://wa.me/6281234567890"
-        target="_blank" rel="noopener">
+         href="https://wa.me/6281234567890"
+         target="_blank" rel="noopener">
         WhatsApp ↗
       </a>
 
-      <a class="btn" href="mailto:emailkamu@example.com">
+      <!-- Ganti email -->
+      <a class="btn"
+         href="mailto:emailkamu@example.com">
         Email ↗
       </a>
 
     </div>
+
   </div>
 
 </section>
@@ -581,62 +709,96 @@ footer {
 
 <footer>
   <div class="wrap">
-    © <span id="year"></span> Nama Kamu. Dibuat dengan semangat.
+    © <span id="year"></span> Robil Maulana.
+    Crafted with creativity.
   </div>
 </footer>
 
 <script>
 
-/* TAHUN OTOMATIS */
+/* YEAR */
 
-document.getElementById('year').textContent =
+document.getElementById("year").textContent =
   new Date().getFullYear();
 
 
-/* SCROLL REVEAL DUA ARAH */
+/* NAVBAR */
 
-const revealTargets = document.querySelectorAll(
-  '.hero > div, .section-title, .about, .skill, .project, .contact'
-);
+const menuBtn = document.getElementById("menuBtn");
+const links = document.getElementById("links");
 
-revealTargets.forEach(el => el.classList.add('reveal'));
+menuBtn.addEventListener("click", () => {
+  const opened = links.classList.toggle("show");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    entry.target.classList.toggle(
-      'is-visible',
-      entry.isIntersecting
-    );
-  });
-}, {
-  threshold: 0.12
+  menuBtn.setAttribute("aria-expanded", opened);
 });
 
-revealTargets.forEach(el => observer.observe(el));
+links.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    links.classList.remove("show");
+    menuBtn.setAttribute("aria-expanded", "false");
+  });
+});
 
 
-/* KRISTAL 3D SUNGGUHAN */
+/* SCROLL REVEAL */
 
-const stage = document.getElementById('stage3d');
-const canvas = document.getElementById('crystalCanvas');
+const revealTargets = document.querySelectorAll(
+  ".hero > div, .section-title, .about, .skill, .project, .contact"
+);
 
-if (typeof THREE === 'undefined') {
+if ("IntersectionObserver" in window) {
+
+  const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      entry.target.classList.toggle(
+        "visible",
+        entry.isIntersecting
+      );
+
+    });
+
+  }, { threshold: 0.12 });
+
+  revealTargets.forEach(el => {
+    el.classList.add("reveal");
+    observer.observe(el);
+  });
+
+} else {
+  revealTargets.forEach(el => {
+    el.classList.add("visible");
+  });
+}
+
+
+/* THREE JS CRYSTAL UNIVERSE */
+
+const stage = document.getElementById("stage3d");
+const canvas = document.getElementById("crystalCanvas");
+
+const pauseBtn = document.getElementById("pauseBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+if (typeof THREE === "undefined") {
 
   stage.innerHTML =
-    '<p style="padding:30px;color:white">Three.js gagal dimuat. Periksa koneksi internet.</p>';
+    '<p style="padding:30px">Three.js gagal dimuat. Periksa koneksi internet.</p>';
 
 } else {
 
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
-    38, 1, 0.1, 100
+    40, 1, 0.1, 100
   );
 
-  camera.position.set(0, 0, 7.2);
+  camera.position.set(0, 0, 7.5);
 
   const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
+    canvas,
     alpha: true,
     antialias: true
   });
@@ -647,146 +809,153 @@ if (typeof THREE === 'undefined') {
 
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
+  renderer.toneMappingExposure = 1.35;
 
 
-  /* PENCAHAYAAN */
+  /* LIGHTING */
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-
-  const keyLight = new THREE.DirectionalLight(
-    0xffffff, 3.5
+  scene.add(
+    new THREE.AmbientLight(0xffffff, 1.1)
   );
 
-  keyLight.position.set(3, 4, 5);
-  scene.add(keyLight);
+  const lights = [
+    {
+      color: 0xffffff,
+      intensity: 4,
+      position: [3, 4, 5]
+    },
+    {
+      color: 0xbccfff,
+      intensity: 25,
+      position: [-4, 1, -3]
+    },
+    {
+      color: 0xffffff,
+      intensity: 15,
+      position: [2, -4, 4]
+    }
+  ];
 
-  const rimLight = new THREE.PointLight(
-    0xcbdcff, 22, 18
-  );
+  lights.forEach(data => {
 
-  rimLight.position.set(-3, 1, -3);
-  scene.add(rimLight);
+    const light = new THREE.PointLight(
+      data.color,
+      data.intensity,
+      20
+    );
 
-  const fillLight = new THREE.PointLight(
-    0xffffff, 12, 15
-  );
+    light.position.set(...data.position);
+    scene.add(light);
 
-  fillLight.position.set(2, -3, 4);
-  scene.add(fillLight);
+  });
 
 
-  /* GRUP KRISTAL DAN ORBIT */
+  /* MAIN GROUP */
 
   const group = new THREE.Group();
   scene.add(group);
 
 
-  /* GEOMETRI GEMSTONE UTUH */
+  /* CRYSTAL GEOMETRY */
 
-  const geometry = new THREE.BufferGeometry();
-
+  const sides = 8;
   const vertices = [];
 
   const top = [0, 1.65, 0];
-  const bottom = [0, -1.48, 0];
+  const bottom = [0, -1.55, 0];
 
   const girdle = [];
   const lower = [];
 
-  const sides = 8;
-
   for (let i = 0; i < sides; i++) {
 
     const angle =
-      (Math.PI * 2 * i) / sides + Math.PI / 8;
+      (Math.PI * 2 * i / sides) + Math.PI / 8;
 
     girdle.push([
-      Math.cos(angle) * 0.92,
-      0.28,
-      Math.sin(angle) * 0.92
+      Math.cos(angle) * 1.0,
+      0.25,
+      Math.sin(angle) * 1.0
     ]);
 
     lower.push([
-      Math.cos(angle) * 0.55,
-      -0.92,
-      Math.sin(angle) * 0.55
+      Math.cos(angle) * 0.56,
+      -0.85,
+      Math.sin(angle) * 0.56
     ]);
 
   }
 
+  function triangle(a, b, c) {
 
-  function addTriangle(a, b, c) {
     vertices.push(
       ...a,
       ...b,
       ...c
     );
-  }
 
+  }
 
   for (let i = 0; i < sides; i++) {
 
     const next = (i + 1) % sides;
 
-    // Mahkota kristal
-    addTriangle(top, girdle[i], girdle[next]);
+    triangle(top, girdle[i], girdle[next]);
 
-    // Sisi tengah
-    addTriangle(girdle[i], lower[i], girdle[next]);
+    triangle(girdle[i], lower[i], girdle[next]);
 
-    addTriangle(girdle[next], lower[i], lower[next]);
+    triangle(girdle[next], lower[i], lower[next]);
 
-    // Ujung bawah kristal
-    addTriangle(lower[i], bottom, lower[next]);
+    triangle(lower[i], bottom, lower[next]);
 
   }
 
+  const geometry = new THREE.BufferGeometry();
 
   geometry.setAttribute(
-    'position',
+    "position",
     new THREE.Float32BufferAttribute(vertices, 3)
   );
 
   geometry.computeVertexNormals();
 
 
-  /* MATERIAL KACA KRISTAL */
+  /* CRYSTAL MATERIAL */
 
-  const material = new THREE.MeshPhysicalMaterial({
+  const crystalMaterial =
+    new THREE.MeshPhysicalMaterial({
 
-    color: 0xdce6f4,
+      color: 0xdce8ff,
 
-    metalness: 0.18,
+      metalness: 0.25,
 
-    roughness: 0.08,
+      roughness: 0.09,
 
-    transmission: 0.42,
+      transmission: 0.65,
 
-    thickness: 1.2,
+      thickness: 1.8,
 
-    ior: 1.6,
+      ior: 1.5,
 
-    clearcoat: 1,
+      clearcoat: 1,
 
-    clearcoatRoughness: 0.04,
+      clearcoatRoughness: 0.03,
 
-    side: THREE.DoubleSide,
+      side: THREE.DoubleSide,
 
-    flatShading: true
+      flatShading: true
 
-  });
-
+    });
 
   const crystal = new THREE.Mesh(
     geometry,
-    material
+    crystalMaterial
   );
 
   group.add(crystal);
 
 
-  /* GARIS FASET KRISTAL */
+  /* CRYSTAL EDGES */
 
   const edges = new THREE.LineSegments(
 
@@ -795,7 +964,7 @@ if (typeof THREE === 'undefined') {
     new THREE.LineBasicMaterial({
       color: 0xffffff,
       transparent: true,
-      opacity: 0.72
+      opacity: 0.9
     })
 
   );
@@ -803,71 +972,80 @@ if (typeof THREE === 'undefined') {
   group.add(edges);
 
 
-  /* CINCIN ORBIT PERTAMA */
+  /* INNER CORE */
 
-  const ringMaterial1 = new THREE.MeshStandardMaterial({
+  const core = new THREE.Mesh(
 
-    color: 0xf4f4f4,
+    new THREE.OctahedronGeometry(0.43, 0),
 
-    metalness: 0.92,
+    new THREE.MeshStandardMaterial({
 
-    roughness: 0.18
+      color: 0xffffff,
 
-  });
+      metalness: 0.8,
+
+      roughness: 0.1,
+
+      emissive: 0x555555,
+
+      emissiveIntensity: 0.4
+
+    })
+
+  );
+
+  group.add(core);
+
+
+  /* ORBIT RINGS */
 
   const ring1 = new THREE.Mesh(
 
     new THREE.TorusGeometry(
-      2.05,
-      0.022,
-      12,
-      160
+      2.05, 0.018, 12, 180
     ),
 
-    ringMaterial1
+    new THREE.MeshStandardMaterial({
+
+      color: 0xffffff,
+      metalness: 1,
+      roughness: 0.17
+
+    })
 
   );
 
-  ring1.rotation.set(1.05, 0.2, -0.35);
+  ring1.rotation.set(1.1, 0.2, -0.3);
 
   group.add(ring1);
 
 
-  /* CINCIN ORBIT KEDUA */
-
-  const ringMaterial2 = new THREE.MeshStandardMaterial({
-
-    color: 0x929292,
-
-    metalness: 0.9,
-
-    roughness: 0.2
-
-  });
-
   const ring2 = new THREE.Mesh(
 
     new THREE.TorusGeometry(
-      2.18,
-      0.014,
-      10,
-      160
+      2.2, 0.012, 10, 180
     ),
 
-    ringMaterial2
+    new THREE.MeshStandardMaterial({
+
+      color: 0x999999,
+      metalness: 1,
+      roughness: 0.2
+
+    })
 
   );
 
-  ring2.rotation.set(0.4, 1.0, 0.7);
+  ring2.rotation.set(0.4, 1, 0.7);
 
   group.add(ring2);
 
 
-  /* TITIK CAHAYA DI ORBIT */
+  /* ORBIT LIGHT */
 
   const bead = new THREE.Mesh(
 
-    new THREE.SphereGeometry(0.075, 20, 20),
+    new THREE.SphereGeometry(0.075, 24, 24),
 
     new THREE.MeshBasicMaterial({
       color: 0xffffff
@@ -876,11 +1054,58 @@ if (typeof THREE === 'undefined') {
   );
 
   ring1.add(bead);
+  bead.position.set(2.05, 0, 0);
 
-  bead.position.set(2, 0, 0);
+
+  /* PARTICLES */
+
+  const particleCount = 550;
+  const particlePositions = new Float32Array(
+    particleCount * 3
+  );
+
+  for (let i = 0; i < particleCount; i++) {
+
+    particlePositions[i * 3] =
+      (Math.random() - 0.5) * 12;
+
+    particlePositions[i * 3 + 1] =
+      (Math.random() - 0.5) * 9;
+
+    particlePositions[i * 3 + 2] =
+      (Math.random() - 0.5) * 8;
+
+  }
+
+  const particleGeometry = new THREE.BufferGeometry();
+
+  particleGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(particlePositions, 3)
+  );
+
+  const particleMaterial =
+    new THREE.PointsMaterial({
+
+      color: 0xffffff,
+
+      size: 0.018,
+
+      transparent: true,
+
+      opacity: 0.7
+
+    });
+
+  const particles = new THREE.Points(
+    particleGeometry,
+    particleMaterial
+  );
+
+  scene.add(particles);
 
 
-  /* INTERAKSI JARI DAN MOUSE */
+  /* DRAG INTERACTION */
 
   let dragging = false;
 
@@ -890,8 +1115,10 @@ if (typeof THREE === 'undefined') {
   let rotationX = -0.12;
   let rotationY = 0.25;
 
+  const initialX = rotationX;
+  const initialY = rotationY;
 
-  stage.addEventListener('pointerdown', event => {
+  stage.addEventListener("pointerdown", event => {
 
     dragging = true;
 
@@ -902,8 +1129,7 @@ if (typeof THREE === 'undefined') {
 
   });
 
-
-  stage.addEventListener('pointermove', event => {
+  stage.addEventListener("pointermove", event => {
 
     if (!dragging) return;
 
@@ -914,8 +1140,8 @@ if (typeof THREE === 'undefined') {
     rotationX += dy * 0.008;
 
     rotationX = Math.max(
-      -1.25,
-      Math.min(1.25, rotationX)
+      -1.3,
+      Math.min(1.3, rotationX)
     );
 
     lastX = event.clientX;
@@ -923,22 +1149,49 @@ if (typeof THREE === 'undefined') {
 
   });
 
-
-  function stopDragging() {
+  function stopDrag() {
     dragging = false;
   }
 
-  stage.addEventListener('pointerup', stopDragging);
-  stage.addEventListener('pointercancel', stopDragging);
-  stage.addEventListener('lostpointercapture', stopDragging);
+  stage.addEventListener("pointerup", stopDrag);
+  stage.addEventListener("pointercancel", stopDrag);
+  stage.addEventListener("lostpointercapture", stopDrag);
 
 
-  /* RESPONSIVE RESIZE */
+  /* BUTTON CONTROLS */
+
+  let paused = false;
+
+  pauseBtn.addEventListener("click", () => {
+
+    paused = !paused;
+
+    pauseBtn.textContent =
+      paused ? "▶ Play" : "❚❚ Pause";
+
+  });
+
+  resetBtn.addEventListener("click", () => {
+
+    rotationX = initialX;
+    rotationY = initialY;
+
+    crystal.position.set(0, 0, 0);
+
+    ring1.rotation.set(1.1, 0.2, -0.3);
+    ring2.rotation.set(0.4, 1, 0.7);
+
+  });
+
+
+  /* RESPONSIVE */
 
   function resize() {
 
     const width = stage.clientWidth;
     const height = stage.clientHeight;
+
+    if (!width || !height) return;
 
     renderer.setSize(width, height, false);
 
@@ -948,18 +1201,27 @@ if (typeof THREE === 'undefined') {
 
   }
 
-  new ResizeObserver(resize).observe(stage);
+  const resizeObserver = new ResizeObserver(resize);
+
+  resizeObserver.observe(stage);
 
   resize();
 
 
-  /* ANIMASI */
+  /* ANIMATION */
 
   const clock = new THREE.Clock();
 
+  let animationId;
+
   function animate() {
 
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
+
+    if (paused) {
+      renderer.render(scene, camera);
+      return;
+    }
 
     const time = clock.getElapsedTime();
 
@@ -973,20 +1235,39 @@ if (typeof THREE === 'undefined') {
       0
     );
 
-    // Kristal melayang perlahan
     crystal.position.y =
-      Math.sin(time * 1.1) * 0.055;
+      Math.sin(time * 1.1) * 0.07;
 
-    // Orbit terus berputar
-    ring1.rotation.z += 0.0028;
+    core.rotation.x = time * 0.4;
+    core.rotation.y = time * 0.7;
 
-    ring2.rotation.y += 0.002;
+    ring1.rotation.z += 0.0025;
+    ring2.rotation.y += 0.0018;
+
+    particles.rotation.y = time * 0.008;
 
     renderer.render(scene, camera);
 
   }
 
   animate();
+
+  /* CLEANUP WHEN PAGE IS LEFT */
+
+  window.addEventListener("pagehide", () => {
+
+    cancelAnimationFrame(animationId);
+
+    resizeObserver.disconnect();
+
+    renderer.dispose();
+
+    geometry.dispose();
+    crystalMaterial.dispose();
+    particleGeometry.dispose();
+    particleMaterial.dispose();
+
+  });
 
 }
 
