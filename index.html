@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,6 +93,7 @@ nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:14px;
 }
 
 .brand{
@@ -124,6 +125,26 @@ nav{
 }
 
 .nav-btn:hover{
+  background:var(--cyan);
+  color:#00100f;
+  box-shadow:0 0 20px #00f0e555;
+}
+
+/* LANGUAGE BUTTON */
+.lang-btn{
+  padding:8px 13px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  color:var(--cyan);
+  background:transparent;
+  font-family:"Space Mono",monospace;
+  font-size:.68rem;
+  cursor:pointer;
+  transition:.3s;
+  white-space:nowrap;
+}
+
+.lang-btn:hover{
   background:var(--cyan);
   color:#00100f;
   box-shadow:0 0 20px #00f0e555;
@@ -565,17 +586,21 @@ ROBIL<span>.</span>
 </a>
 
 <div class="links" id="links">
-<a href="#home">Beranda</a>
-<a href="#about">Tentang</a>
-<a href="#skills">Keahlian</a>
-<a href="#projects">Proyek</a>
-<a href="#contact" class="nav-btn">Hubungi Saya ↗</a>
+<a href="#home" data-i18n="navHome">Home</a>
+<a href="#about" data-i18n="navAbout">About</a>
+<a href="#skills" data-i18n="navSkills">Skills</a>
+<a href="#projects" data-i18n="navProjects">What I Can Do</a>
+<a href="#contact" class="nav-btn" data-i18n="navContact">Contact Me ↗</a>
 </div>
+
+<button class="lang-btn" id="langBtn" type="button" aria-label="Change language">
+ID
+</button>
 
 <button
 class="menu"
 id="menuBtn"
-aria-label="Buka menu"
+aria-label="Open menu"
 aria-expanded="false">
 ☰
 </button>
@@ -594,33 +619,32 @@ aria-expanded="false">
 Digital Mind / Creative Future
 </div>
 
-<h1>
-Membangun<br>
-Masa <span class="cyan">Depan.</span><br>
-Dengan Kode.
+<h1 data-i18n-html="heroTitle">
+Building<br>
+The <span class="cyan">Future.</span><br>
+With Code.
 </h1>
 
 <div class="typed">
 <span id="typed"></span><span class="caret"></span>
 </div>
 
-<p class="hero-desc">
-Halo, saya Robil Mualan. Saya memiliki ketertarikan
-pada programming, teknologi, gaming, dan bisnis.
-Saya senang mengeksplorasi ide baru, mempelajari
-hal-hal kreatif, dan mengubah gagasan menjadi
-sesuatu yang nyata.
+<p class="hero-desc" data-i18n="heroDesc">
+Hello, I'm Robil Mualan. I'm interested in programming,
+technology, gaming, and business. I enjoy exploring new
+ideas, learning creative things, and turning concepts
+into something real.
 </p>
 
 <div class="actions">
-<a href="#about" class="btn primary">KENALI SAYA ↗</a>
-<a href="#projects" class="btn">LIHAT PROYEK</a>
+<a href="#about" class="btn primary" data-i18n="heroBtn1">GET TO KNOW ME ↗</a>
+<a href="#projects" class="btn" data-i18n="heroBtn2">WHAT I CAN DO</a>
 </div>
 
 <div class="socials">
 <a href="#contact">WhatsApp</a>
 <a href="#contact">Email</a>
-<a href="#projects">Projects</a>
+<a href="#projects">Services</a>
 </div>
 
 </div>
@@ -631,8 +655,8 @@ sesuatu yang nyata.
 
 <img
 src="profile.jpg"
-alt="Foto profil Robil Mualan"
-onerror="this.style.opacity='0.15';this.alt='Foto belum ditemukan';"
+alt="Robil Mualan profile photo"
+onerror="this.style.opacity='0.15';this.alt='Profile photo not found';"
 >
 
 <div class="glitch"></div>
@@ -652,17 +676,17 @@ ROBIL MUALAN / 001
 <section class="content-section wrap" id="about">
 
 <div class="section-head">
-<div class="eyebrow">Who am I?</div>
-<h2>About <span class="cyan">Me.</span></h2>
-<p>Discover the person behind the screen.</p>
+<div class="eyebrow" data-i18n="aboutEyebrow">Who am I?</div>
+<h2 data-i18n-html="aboutTitle">About <span class="cyan">Me.</span></h2>
+<p data-i18n="aboutSubtitle">Discover the person behind the screen.</p>
 </div>
 
 <div class="about">
-<p>
+<p data-i18n-html="aboutText">
 Hello! I'm <strong>Robil Mualan</strong>, a technology enthusiast passionate about programming, digital business, and gaming. I enjoy exploring new technologies, developing websites, providing VPS and Pterodactyl Panel services, and playing MOBA games like Mobile Legends. I'm always eager to learn new things, improve my skills, and turn creative ideas into meaningful digital experiences.
 </p>
 
-<div class="philosophy">
+<div class="philosophy" data-i18n="philosophy">
 "Dream big, keep learning, and turn ideas into reality."
 </div>
 </div>
@@ -673,21 +697,18 @@ Hello! I'm <strong>Robil Mualan</strong>, a technology enthusiast passionate abo
 <section class="content-section wrap" id="skills">
 
 <div class="section-head">
-<div class="eyebrow">What I Do</div>
-<h2>My <span class="cyan">Skills.</span></h2>
-<p>Interests, abilities, and things I love exploring.</p>
+<div class="eyebrow" data-i18n="skillsEyebrow">What I Do</div>
+<h2 data-i18n-html="skillsTitle">My <span class="cyan">Skills.</span></h2>
+<p data-i18n="skillsSubtitle">Interests, abilities, and things I love exploring.</p>
 </div>
 
 <div class="grid3">
 
 <!-- PROGRAMMING -->
 <article class="card">
-
 <div class="icon">💻</div>
-
 <h3>Programming</h3>
-
-<p>
+<p data-i18n="programmingDesc">
 Interested in programming and software development,
 with a passion for exploring technology and building
 digital experiences. Proficient in programming
@@ -695,19 +716,14 @@ languages such as JavaScript, Python, Java, C++,
 PHP, and more. Always eager to learn new technologies,
 improve coding skills, and create innovative solutions.
 </p>
-
-<span class="tag">PROGRAMMING LANGUAGES</span>
-
+<span class="tag" data-i18n="programmingTag">PROGRAMMING LANGUAGES</span>
 </article>
 
 <!-- BUSINESS -->
 <article class="card">
-
 <div class="icon">📈</div>
-
-<h3>Business & Digital Services</h3>
-
-<p>
+<h3 data-i18n="businessTitle">Business & Digital Services</h3>
+<p data-i18n="businessDesc">
 Passionate about digital entrepreneurship and
 technology-based businesses. I provide Pterodactyl
 Panel setup, VPS services, and professional website
@@ -716,21 +732,16 @@ solutions, exploring new business opportunities,
 and helping individuals and businesses build
 their online presence.
 </p>
-
 <span class="tag">PTERODACTYL PANEL</span>
-<span class="tag">VPS SERVICES</span>
-<span class="tag">WEB DEVELOPMENT</span>
-
+<span class="tag" data-i18n="vpsTag">VPS SERVICES</span>
+<span class="tag" data-i18n="webTag">WEB DEVELOPMENT</span>
 </article>
 
 <!-- GAMING -->
 <article class="card">
-
 <div class="icon">🎮</div>
-
 <h3>Gaming & Strategy</h3>
-
-<p>
+<p data-i18n="gamingDesc">
 Passionate about gaming, especially survival,
 strategy, and MOBA games like Mobile Legends.
 I also enjoy shooting and battle royale games
@@ -738,9 +749,7 @@ such as PUBG and Free Fire, as well as car drifting
 games. Gaming helps me develop strategic thinking,
 quick decision-making, teamwork, and problem-solving skills.
 </p>
-
-<span class="tag">GAMING & ENTERTAINMENT</span>
-
+<span class="tag" data-i18n="gamingTag">GAMING & ENTERTAINMENT</span>
 </article>
 
 </div>
@@ -750,9 +759,9 @@ quick decision-making, teamwork, and problem-solving skills.
 <section class="content-section wrap" id="projects">
 
 <div class="section-head">
-<div class="eyebrow">My Expertise</div>
-<h2>What I Can <span class="cyan">Do.</span></h2>
-<p>Skills and digital services I can provide.</p>
+<div class="eyebrow" data-i18n="expertiseEyebrow">My Expertise</div>
+<h2 data-i18n-html="expertiseTitle">What I Can <span class="cyan">Do.</span></h2>
+<p data-i18n="expertiseSubtitle">Skills and digital services I can provide.</p>
 </div>
 
 <div class="grid3">
@@ -761,8 +770,8 @@ quick decision-making, teamwork, and problem-solving skills.
 <article class="card">
 <div class="project-number">EXPERTISE / 001</div>
 <div class="icon">🖥️</div>
-<h3>VPS & Server Management</h3>
-<p>
+<h3 data-i18n="vpsTitle">VPS & Server Management</h3>
+<p data-i18n="vpsDesc">
 Setting up and managing VPS environments,
 configuring Linux servers, and installing
 Pterodactyl Panel for game server management.
@@ -776,8 +785,8 @@ Pterodactyl Panel for game server management.
 <article class="card">
 <div class="project-number">EXPERTISE / 002</div>
 <div class="icon">🌐</div>
-<h3>Website Development</h3>
-<p>
+<h3 data-i18n="websiteTitle">Website Development</h3>
+<p data-i18n="websiteDesc">
 Creating modern, responsive, and interactive
 websites with clean layouts and user-friendly
 designs for personal and business needs.
@@ -791,8 +800,8 @@ designs for personal and business needs.
 <article class="card">
 <div class="project-number">EXPERTISE / 003</div>
 <div class="icon">💻</div>
-<h3>Programming & Development</h3>
-<p>
+<h3 data-i18n="developmentTitle">Programming & Development</h3>
+<p data-i18n="developmentDesc">
 Writing code, exploring programming languages,
 solving problems, and developing digital
 solutions using various technologies.
@@ -811,13 +820,13 @@ solutions using various technologies.
 
 <div class="contact">
 
-<div class="eyebrow">Let's Connect</div>
+<div class="eyebrow" data-i18n="contactEyebrow">Let's Connect</div>
 
-<h2>
+<h2 data-i18n-html="contactTitle">
 Let's Create <span class="cyan">Something.</span>
 </h2>
 
-<p>
+<p data-i18n="contactDesc">
 Have an interesting idea? Let's connect
 and make it happen.
 </p>
@@ -874,8 +883,146 @@ links.querySelectorAll("a").forEach(link=>{
   });
 });
 
+// MULTI LANGUAGE
+const translations = {
+  en:{
+    navHome:"Home",
+    navAbout:"About",
+    navSkills:"Skills",
+    navProjects:"What I Can Do",
+    navContact:"Contact Me ↗",
+
+    heroTitle:"Building<br>The <span class='cyan'>Future.</span><br>With Code.",
+    heroDesc:"Hello, I'm Robil Mualan. I'm interested in programming, technology, gaming, and business. I enjoy exploring new ideas, learning creative things, and turning concepts into something real.",
+    heroBtn1:"GET TO KNOW ME ↗",
+    heroBtn2:"WHAT I CAN DO",
+
+    aboutEyebrow:"Who am I?",
+    aboutTitle:"About <span class='cyan'>Me.</span>",
+    aboutSubtitle:"Discover the person behind the screen.",
+    aboutText:"Hello! I'm <strong>Robil Mualan</strong>, a technology enthusiast passionate about programming, digital business, and gaming. I enjoy exploring new technologies, developing websites, providing VPS and Pterodactyl Panel services, and playing MOBA games like Mobile Legends. I'm always eager to learn new things, improve my skills, and turn creative ideas into meaningful digital experiences.",
+    philosophy:"\"Dream big, keep learning, and turn ideas into reality.\"",
+
+    skillsEyebrow:"What I Do",
+    skillsTitle:"My <span class='cyan'>Skills.</span>",
+    skillsSubtitle:"Interests, abilities, and things I love exploring.",
+    programmingDesc:"Interested in programming and software development, with a passion for exploring technology and building digital experiences. Proficient in programming languages such as JavaScript, Python, Java, C++, PHP, and more. Always eager to learn new technologies, improve coding skills, and create innovative solutions.",
+    programmingTag:"PROGRAMMING LANGUAGES",
+    businessTitle:"Business & Digital Services",
+    businessDesc:"Passionate about digital entrepreneurship and technology-based businesses. I provide Pterodactyl Panel setup, VPS services, and professional website development. Focused on delivering reliable digital solutions, exploring new business opportunities, and helping individuals and businesses build their online presence.",
+    vpsTag:"VPS SERVICES",
+    webTag:"WEB DEVELOPMENT",
+    gamingDesc:"Passionate about gaming, especially survival, strategy, and MOBA games like Mobile Legends. I also enjoy shooting and battle royale games such as PUBG and Free Fire, as well as car drifting games. Gaming helps me develop strategic thinking, quick decision-making, teamwork, and problem-solving skills.",
+    gamingTag:"GAMING & ENTERTAINMENT",
+
+    expertiseEyebrow:"My Expertise",
+    expertiseTitle:"What I Can <span class='cyan'>Do.</span>",
+    expertiseSubtitle:"Skills and digital services I can provide.",
+    vpsTitle:"VPS & Server Management",
+    vpsDesc:"Setting up and managing VPS environments, configuring Linux servers, and installing Pterodactyl Panel for game server management.",
+    websiteTitle:"Website Development",
+    websiteDesc:"Creating modern, responsive, and interactive websites with clean layouts and user-friendly designs for personal and business needs.",
+    developmentTitle:"Programming & Development",
+    developmentDesc:"Writing code, exploring programming languages, solving problems, and developing digital solutions using various technologies.",
+
+    contactEyebrow:"Let's Connect",
+    contactTitle:"Let's Create <span class='cyan'>Something.</span>",
+    contactDesc:"Have an interesting idea? Let's connect and make it happen."
+  },
+
+  id:{
+    navHome:"Beranda",
+    navAbout:"Tentang",
+    navSkills:"Keahlian",
+    navProjects:"Yang Bisa Saya Lakukan",
+    navContact:"Hubungi Saya ↗",
+
+    heroTitle:"Membangun<br>Masa <span class='cyan'>Depan.</span><br>Dengan Kode.",
+    heroDesc:"Halo, saya Robil Mualan. Saya memiliki ketertarikan pada programming, teknologi, gaming, dan bisnis. Saya senang mengeksplorasi ide baru, mempelajari hal-hal kreatif, dan mengubah gagasan menjadi sesuatu yang nyata.",
+    heroBtn1:"KENALI SAYA ↗",
+    heroBtn2:"YANG BISA SAYA LAKUKAN",
+
+    aboutEyebrow:"Siapa Saya?",
+    aboutTitle:"Tentang <span class='cyan'>Saya.</span>",
+    aboutSubtitle:"Kenali sosok di balik layar.",
+    aboutText:"Halo! Saya <strong>Robil Mualan</strong>, seorang penggemar teknologi yang memiliki minat besar pada programming, bisnis digital, dan gaming. Saya senang mengeksplorasi teknologi baru, mengembangkan website, menyediakan layanan VPS dan Pterodactyl Panel, serta bermain game MOBA seperti Mobile Legends. Saya selalu bersemangat mempelajari hal baru, meningkatkan kemampuan, dan mengubah ide kreatif menjadi pengalaman digital yang bermanfaat.",
+    philosophy:"\"Bermimpilah besar, terus belajar, dan wujudkan ide menjadi kenyataan.\"",
+
+    skillsEyebrow:"Apa yang Saya Lakukan",
+    skillsTitle:"Keahlian <span class='cyan'>Saya.</span>",
+    skillsSubtitle:"Minat, kemampuan, dan hal-hal yang saya suka eksplorasi.",
+    programmingDesc:"Memiliki minat dalam programming dan pengembangan perangkat lunak, serta semangat untuk mengeksplorasi teknologi dan membangun pengalaman digital. Menguasai berbagai bahasa pemrograman seperti JavaScript, Python, Java, C++, PHP, dan lainnya. Selalu bersemangat mempelajari teknologi baru, meningkatkan kemampuan coding, dan menciptakan solusi inovatif.",
+    programmingTag:"BAHASA PEMROGRAMAN",
+    businessTitle:"Bisnis & Layanan Digital",
+    businessDesc:"Memiliki ketertarikan pada kewirausahaan digital dan bisnis berbasis teknologi. Saya menyediakan layanan instalasi Pterodactyl Panel, VPS, dan pembuatan website profesional. Berfokus pada solusi digital yang andal, mengeksplorasi peluang bisnis baru, serta membantu individu dan bisnis membangun kehadiran online mereka.",
+    vpsTag:"LAYANAN VPS",
+    webTag:"PENGEMBANGAN WEBSITE",
+    gamingDesc:"Menyukai dunia gaming, terutama game survival, strategy, dan MOBA seperti Mobile Legends. Saya juga menikmati game tembak-menembak dan battle royale seperti PUBG dan Free Fire, serta game drifting mobil. Gaming membantu mengembangkan pemikiran strategis, pengambilan keputusan, kerja sama tim, dan kemampuan memecahkan masalah.",
+    gamingTag:"GAME & HIBURAN",
+
+    expertiseEyebrow:"Keahlian Saya",
+    expertiseTitle:"Yang Bisa Saya <span class='cyan'>Lakukan.</span>",
+    expertiseSubtitle:"Kemampuan dan layanan digital yang bisa saya sediakan.",
+    vpsTitle:"Manajemen VPS & Server",
+    vpsDesc:"Menyiapkan dan mengelola lingkungan VPS, mengonfigurasi server Linux, serta memasang Pterodactyl Panel untuk pengelolaan server game.",
+    websiteTitle:"Pengembangan Website",
+    websiteDesc:"Membuat website modern, responsif, dan interaktif dengan tampilan yang rapi serta desain yang mudah digunakan untuk kebutuhan pribadi maupun bisnis.",
+    developmentTitle:"Programming & Pengembangan",
+    developmentDesc:"Menulis kode, mengeksplorasi bahasa pemrograman, memecahkan masalah, dan mengembangkan solusi digital menggunakan berbagai teknologi.",
+
+    contactEyebrow:"Mari Terhubung",
+    contactTitle:"Mari Ciptakan <span class='cyan'>Sesuatu.</span>",
+    contactDesc:"Punya ide menarik? Mari terhubung dan wujudkan bersama."
+  }
+};
+
+const langBtn = document.getElementById("langBtn");
+
+function setLanguage(lang){
+  const selected = translations[lang] ? lang : "en";
+
+  document.documentElement.lang = selected;
+
+  document.querySelectorAll("[data-i18n]").forEach(element=>{
+    const key = element.dataset.i18n;
+    if(translations[selected][key] !== undefined){
+      element.textContent = translations[selected][key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-html]").forEach(element=>{
+    const key = element.dataset.i18nHtml;
+    if(translations[selected][key] !== undefined){
+      element.innerHTML = translations[selected][key];
+    }
+  });
+
+  langBtn.textContent = selected === "en" ? "ID" : "EN";
+  langBtn.setAttribute(
+    "aria-label",
+    selected === "en" ? "Switch to Indonesian" : "Ganti ke bahasa Inggris"
+  );
+
+  localStorage.setItem("portfolio-language",selected);
+
+  // Update typing words
+  words = selected === "en"
+    ? ["Creative Thinker.","Programmer.","Gamer.","Entrepreneur."]
+    : ["Pemikir Kreatif.","Programmer.","Gamer.","Pengusaha."];
+}
+
+// Language button
+langBtn.addEventListener("click",()=>{
+  const current = document.documentElement.lang;
+  setLanguage(current === "en" ? "id" : "en");
+});
+
+// Load saved language, English by default
+const savedLanguage = localStorage.getItem("portfolio-language") || "en";
+setLanguage(savedLanguage);
+
 // TYPING EFFECT
-const words = [
+let words = [
   "Creative Thinker.",
   "Programmer.",
   "Gamer.",
